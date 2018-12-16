@@ -15,7 +15,7 @@ import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.ServerSocketInterface;
 import javafx.concurrent.Task;
 
-//import static edu.hm.dako.chat.server.ServerFactory.getDecoratedServerSocket;
+//import static edu.hm.dako.chat.server.ServerFactory.getDecoratedServerSocket; //später wieder einkommentieren (Sophia)
 
 /**
  * <p/>

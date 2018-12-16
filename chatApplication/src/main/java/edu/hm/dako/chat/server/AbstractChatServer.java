@@ -7,10 +7,7 @@ package edu.hm.dako.chat.server;
  *
  */
 
-/**
- *
- * Push test Sophia
- */
+
 public abstract class AbstractChatServer implements ChatServerInterface {
 
 	// Gemeinsam fuer alle Workerthreads verwaltete Liste aller eingeloggten
