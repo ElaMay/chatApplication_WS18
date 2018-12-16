@@ -43,7 +43,7 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
         }
     }
 
-    //Die Nachrichten, die versendet werden.
+    //Die Nachrichten, die versendet werden. (ist nicht nötig)
    // private void sendMessage(InetAddress address, int port, byte data[], int length) throws IOException {
        // DatagramPacket packet = new DatagramPacket(data, length, address, port);
        // socket.send(packet);
