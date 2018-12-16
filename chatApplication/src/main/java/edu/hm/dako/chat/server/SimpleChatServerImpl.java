@@ -1,7 +1,9 @@
 package edu.hm.dako.chat.server;
 
+import java.net.DatagramSocket;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
@@ -13,6 +15,8 @@ import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.ServerSocketInterface;
 import javafx.concurrent.Task;
 
+import static edu.hm.dako.chat.server.ServerFactory.getDecoratedServerSocket;
+
 /**
  * <p/>
  * Simple-Chat-Server-Implementierung
@@ -20,6 +24,9 @@ import javafx.concurrent.Task;
  * @author Peter Mandl
  */
 public class SimpleChatServerImpl extends AbstractChatServer {
+
+	//Referenz zu dem AuditLogServer (in Bezug auf ChatServer)
+	private AuditLogServerInterface auditServer;
 
 	private static Log log = LogFactory.getLog(SimpleChatServerImpl.class);
 
@@ -32,13 +39,13 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 
 	/**
 	 * Konstruktor
-	 * 
+	 *
 	 * @param executorService
 	 * @param socket
 	 * @param serverGuiInterface
 	 */
 	public SimpleChatServerImpl(ExecutorService executorService,
-			ServerSocketInterface socket, ChatServerGuiInterface serverGuiInterface) {
+								ServerSocketInterface socket, ChatServerGuiInterface serverGuiInterface) {
 		log.debug("SimpleChatServerImpl konstruiert");
 		this.executorService = executorService;
 		this.socket = socket;
@@ -47,10 +54,19 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 		counter.logoutCounter = new AtomicInteger(0);
 		counter.eventCounter = new AtomicInteger(0);
 		counter.confirmCounter = new AtomicInteger(0);
+		//AuditLog (UDP)
+		try {
+			auditServer = new AuditLogServerImplements(Executors.newCachedThreadPool(), new DatagramSocket(4445));
+		} catch (Throwable e) {
+			log.error("Could not create AuditLogServer!");
+		}
+
 	}
 
 	@Override
 	public void start() {
+		//Start vom Server des AuditLogs
+		auditServer.start();
 		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
@@ -65,7 +81,7 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 
 						Connection connection = socket.accept();
 						log.debug("Neuer Verbindungsaufbauwunsch empfangen");
-
+						// eine Nachricht an AuditLog Server, dass eine Connection kommt
 						// Neuen Workerthread starten
 						executorService.submit(new SimpleChatWorkerThreadImpl(connection, clients,
 								counter, serverGuiInterface));
@@ -91,6 +107,8 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 	@Override
 	public void stop() throws Exception {
 
+		//Stoppen des Servers vom AuditLog
+		auditServer.stop();
 		// Alle Verbindungen zu aktiven Clients abbauen
 		Vector<String> sendList = clients.getClientNameList();
 		for (String s : new Vector<String>(sendList)) {
