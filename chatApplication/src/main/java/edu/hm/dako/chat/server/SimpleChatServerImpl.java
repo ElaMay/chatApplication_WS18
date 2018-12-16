@@ -56,7 +56,7 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 		counter.confirmCounter = new AtomicInteger(0);
 		//AuditLog (UDP)
 		try {
-            auditServer = new AuditLogServerImplements(Executors.newCachedThreadPool(), new DatagramSocket(4445));
+			auditServer = new AuditLogServerImpl(Executors.newCachedThreadPool(), new DatagramSocket(4445));
 		} catch (Throwable e) {
 			log.error("Could not create AuditLogServer!");
 		}
