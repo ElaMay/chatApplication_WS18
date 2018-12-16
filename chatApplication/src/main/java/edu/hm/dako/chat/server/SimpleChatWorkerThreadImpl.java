@@ -1,5 +1,6 @@
 package edu.hm.dako.chat.server;
 
+import java.net.*;
 import java.util.Vector;
 
 import org.apache.commons.logging.Log;
@@ -217,6 +218,31 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		} else {
 			//+++++++++++++++++
 			//hier socket öffnen und an AuditLogServer senden.
+
+			try {
+				DatagramSocket socket = new DatagramSocket();
+
+//				byte[] ipv4Address = new byte[] { (byte)192, (byte)168, (byte)2, (byte)238};
+//				InetAddress address = new InetAddress.getByAddress(ipv4Address);
+				InetAddress address = InetAddress.getByName("192.168.2.238");
+
+				byte buffer[] = new byte[1];
+				DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, 3001);
+
+				log.error("hi ");
+				socket.send(packet);
+				log.error("hi2 ");
+				socket.close();
+				log.error("hi3");
+			}catch (Exception e){
+				log.error(e.getMessage());
+			}
+
+//
+//				protected void sendPacket() throws IOException {
+//				socket.send(packet);
+//				System.out.println("gesendet");
+//				}
 
 
 
