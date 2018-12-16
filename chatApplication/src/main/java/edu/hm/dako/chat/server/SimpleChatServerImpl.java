@@ -66,7 +66,8 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 	@Override
 	public void start() {
 		//Start vom Server des AuditLogs
-		auditServer.start();
+		auditServer.start();	///+++++++++++++++++ später in einem anderem packet machen
+
 		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
@@ -109,6 +110,7 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 
 		//Stoppen des Servers vom AuditLog
 		auditServer.stop();
+
 		// Alle Verbindungen zu aktiven Clients abbauen
 		Vector<String> sendList = clients.getClientNameList();
 		for (String s : new Vector<String>(sendList)) {

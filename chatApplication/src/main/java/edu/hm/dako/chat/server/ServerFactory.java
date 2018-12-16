@@ -49,6 +49,11 @@ public final class ServerFactory {
 
 		switch (implType) {
 
+			//+++++++++++++++++
+			//hier noch UDP Case einfügen
+
+
+			//+++++++++++++++++
 		case TCPSimpleImplementation:
 
 			try {

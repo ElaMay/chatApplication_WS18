@@ -215,6 +215,14 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		if (!clients.existsClient(receivedPdu.getUserName())) {
 			log.debug("User nicht in Clientliste: " + receivedPdu.getUserName());
 		} else {
+			//+++++++++++++++++
+			//hier socket öffnen und an AuditLogServer senden.
+
+
+
+
+			//+++++++++++++++++
+
 			// Liste der betroffenen Clients ermitteln, (die drinnen sind)
 			Vector<String> sendList = clients.getClientNameList();
 			ChatPDU pdu = ChatPDU.createChatMessageEventPdu(userName, receivedPdu);
