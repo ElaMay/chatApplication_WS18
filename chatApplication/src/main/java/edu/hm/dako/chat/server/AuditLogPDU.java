@@ -1,5 +1,6 @@
 package edu.hm.dako.chat.server;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import edu.hm.dako.chat.common.ChatPDU;
 import edu.hm.dako.chat.common.ClientConversationStatus;
 import edu.hm.dako.chat.common.PduType;
@@ -8,6 +9,7 @@ import javax.print.attribute.standard.PDLOverrideSupported;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Vector;
+import java.util.function.ToDoubleBiFunction;
 
 public class AuditLogPDU implements Serializable {
 
@@ -62,6 +64,7 @@ public class AuditLogPDU implements Serializable {
 
     public String toString() {
 
+        //TODO: Workerthread null verbessern
        // switch (receivedPdu.getPduType()) {
         switch (this.getType()) {
 
@@ -70,8 +73,8 @@ public class AuditLogPDU implements Serializable {
                 return "\n"
                         + "AuditLogPdu ****************************************************************************************************"
                         + "\n" + "PduType: " + this.type + ", " +   "\n" + "Date: " + this.date + ", " + "\n" + "userName: " + this.userName
-                        + ", " + "\n" + "workerThradServer: " + this.serverThread + ", " + "\n"
-                        + "clientThread: " + this.clientThread + "\n" + ", " + "\n" + "messageContent: " + this.messageContent + "\n"
+                        + ", " + "\n" + "workerThreadServer: " + this.serverThread + ", " + "\n"
+                        + "clientThread: " + this.clientThread + ", " + "\n" + "messageContent: " + this.messageContent + "\n"
                         + "**************************************************************************************************** AuditLogPdu"
                         + "\n";
             //Für alle anderen nicht.
@@ -79,7 +82,7 @@ public class AuditLogPDU implements Serializable {
                 return "\n"
                         + "AuditLogPdu ****************************************************************************************************"
                         + "\n" + "PduType: " + this.type + ", " +   "\n" + "Date: " + this.date + ", " + "\n" + "userName: " + this.userName
-                        + ", " + "\n" + "workerThradServer: " + this.serverThread + ", " + "\n"
+                        + ", " + "\n" + "workerThreadServer: " + this.serverThread + ", " + "\n"
                         + "clientThread: " + this.clientThread + "\n"
                         + "**************************************************************************************************** AuditLogPdu"
                         + "\n";

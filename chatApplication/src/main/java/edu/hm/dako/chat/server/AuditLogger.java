@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
+/**
+ * @author Sophia Weißenberger
+ *
+ */
 public class AuditLogger {
 
     public enum OutputType {
