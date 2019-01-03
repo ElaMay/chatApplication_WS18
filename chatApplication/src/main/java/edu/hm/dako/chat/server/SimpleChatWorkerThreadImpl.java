@@ -24,11 +24,18 @@ import edu.hm.dako.chat.connection.EndOfFileException;
 public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 
 	private static Log log = LogFactory.getLog(SimpleChatWorkerThreadImpl.class);
+	private AuditLogger auditLogger;
 
 	public SimpleChatWorkerThreadImpl(Connection con, SharedChatClientList clients,
 									  SharedServerCounter counter, ChatServerGuiInterface serverGuiInterface) {
 
 		super(con, clients, counter, serverGuiInterface);
+		try{
+			auditLogger = AuditLogger.getInstance();
+		}
+		catch (UnknownHostException e) {
+			log.error("AuditLog konnte nicht gestartet werden");
+		}
 	}
 
 	@Override
@@ -203,12 +210,7 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 	}
 
 	//++++++++++++++++++++++++++++++++++++++++++++++
-	public static byte[] serialize(Object obj) throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		ObjectOutputStream os = new ObjectOutputStream(out);
-		os.writeObject(obj);
-		return out.toByteArray();
-	}
+
 
 
 //	private void sendPacket() throws IOException, SocketException, UnknownHostException {
@@ -232,79 +234,10 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 
 	//++++++++++++++++++++++++++++++++++++++++++++++
 
-	private InetAddress address;
-	private int port;
-	private boolean udp;
-	private Socket tcpSocket;
-	private DatagramSocket udpSocket;
 
-	public boolean startAuditLog(){
 
-		// Get Info from ChatServerGUI
-		this.udp = ChatServerGUI.auditUseUDP.isSelected();
-		this.port = Integer.parseInt(ChatServerGUI.auditlogPort.getText());
-		try {
-			address = InetAddress.getByName(ChatServerGUI.auditlogIP.getText());
-		}
-		catch (UnknownHostException e) {
-			return false; // Start failed
-		}
 
-		//				byte[] ipv4Address = new byte[] { (byte)192, (byte)168, (byte)2, (byte)238};
-		// 				InetAddress address = new InetAddress.getByAddress(ipv4Address);
 
-		if(udp){
-			try {
-				//+++++++++++++++++
-				//hier socket öffnen
-				udpSocket = new DatagramSocket();
-
-			}catch (Exception e){
-				log.error(e.getMessage());
-				return false;
-			}
-		}
-		else {
-			try {
-				tcpSocket = new Socket(address, port);
-			}
-			catch (IOException e){
-				log.error(e.getMessage());
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public void stopAuditLog() {
-
-		//TODO: Shutdownmessage an AuditlogServer senden
-
-		try{
-			if(udp)
-				udpSocket.close();
-			else
-				tcpSocket.close();
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
-	}
-
-	private void sendAudit(ChatPDU receivedPdu) throws IOException{
-		new AuditLogPDU(receivedPdu.getPduType(), receivedPdu.getUserName(), receivedPdu.getServerThreadName(), receivedPdu.getClientThreadName(), receivedPdu.getMessage());
-		if(udp){
-
-			byte buffer[] = serialize(receivedPdu);
-			DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, port);
-			udpSocket.send(packet);
-		}
-		else {
-			ObjectOutputStream oos = new ObjectOutputStream(tcpSocket.getOutputStream());
-			oos.writeObject(receivedPdu);
-			oos.flush();
-		}
-	}
 
 
 
@@ -542,21 +475,21 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 			switch (receivedPdu.getPduType()) {
 
 				case LOGIN_REQUEST:
-					sendAudit(receivedPdu);
+					auditLogger.sendAudit(receivedPdu);
 					// Login-Request vom Client empfangen
 					// an AuditLog Server
 					loginRequestAction(receivedPdu);
 					break;
 
 				case CHAT_MESSAGE_REQUEST:
-					sendAudit(receivedPdu);
+					auditLogger.sendAudit(receivedPdu);
 					// an AuditLog Server
 					// Chat-Nachricht angekommen, an alle verteilen
 					chatMessageRequestAction(receivedPdu);
 					break;
 
 				case LOGOUT_REQUEST:
-					sendAudit(receivedPdu);
+					auditLogger.sendAudit(receivedPdu);
 					// an AuditLog Server
 					// Logout-Request vom Client empfangen
 					logoutRequestAction(receivedPdu);
@@ -569,6 +502,7 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 			}
 		} catch (Exception e) {
 			log.error("Exception bei der Nachrichtenverarbeitung");
+			e.printStackTrace();
 			ExceptionHandler.logExceptionAndTerminate(e);
 		}
 	}

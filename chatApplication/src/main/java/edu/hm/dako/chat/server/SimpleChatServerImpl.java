@@ -1,6 +1,9 @@
 package edu.hm.dako.chat.server;
 
 import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -38,6 +41,9 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 	// entgegennimmt
 	private ServerSocketInterface socket;
 
+
+	private AuditLogger auditLogger;
+
 	/**
 	 * Konstruktor
 	 *
@@ -55,24 +61,19 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 		counter.logoutCounter = new AtomicInteger(0);
 		counter.eventCounter = new AtomicInteger(0);
 		counter.confirmCounter = new AtomicInteger(0);
-		//AuditLog (UDP)
-//		try {
-//			auditServer = new AuditLogServerImpl(Executors.newCachedThreadPool(), new DatagramSocket(4445));
-//		} catch (Throwable e) {
-//			log.error("Could not create AuditLogServer!");
-//		}
+
+		try{
+			auditLogger = AuditLogger.getInstance();
+		}
+		catch (UnknownHostException e) {
+			log.error("AuditLog konnte nicht gestartet werden");
+		}
 
 	}
 
 	@Override
 	public void start() {
-		//Start vom Server des AuditLogs
-//		try {
-//			auditServer.start();    ///+++++++++++++++++ später in einem anderem packet machen
-//		}
-//		catch (IOException e){
-//			log.error("Could not create AuditLogServer output File!");
-//		}
+		auditLogger.startAuditLog();
 
 		Task<Void> task = new Task<Void>() {
 			@Override
@@ -113,9 +114,7 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 
 	@Override
 	public void stop() throws Exception {
-
-		//Stoppen des Servers vom AuditLog
-		auditServer.stop();
+		auditLogger.stopAuditLog();
 
 		// Alle Verbindungen zu aktiven Clients abbauen
 		Vector<String> sendList = clients.getClientNameList();
