@@ -22,7 +22,6 @@ public class AuditLogPDU implements Serializable {
      * - Identifikation des verarbeitenden WorkerThreads im Chat-Server
      * - Identifikation des verarbeitenden Threads im Chat-Client
      * - Inhalt der Chat-Nachricht (nur bei Chat Message-Request)
-     * https://stackoverflow.com/questions/3997459/send-and-receive-serialize-object-on-udp
      * */
 
     private PduType type;
@@ -44,7 +43,7 @@ public class AuditLogPDU implements Serializable {
         this.userName = null;
         this.serverThread = null;
         this.clientThread = null;
-        this.messageContent = null;     //richtig so???
+        this.messageContent = null;
     }
 
     public AuditLogPDU(PduType type, String userName, String serverThread, String clientThread){

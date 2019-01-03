@@ -1,15 +1,15 @@
 package edu.hm.dako.chat.server;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.Vector;
 
+import edu.hm.dako.chat.common.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import edu.hm.dako.chat.common.ChatPDU;
-import edu.hm.dako.chat.common.ClientConversationStatus;
-import edu.hm.dako.chat.common.ClientListEntry;
-import edu.hm.dako.chat.common.ExceptionHandler;
 import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.ConnectionTimeoutException;
 import edu.hm.dako.chat.connection.EndOfFileException;
@@ -202,6 +202,37 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		}
 	}
 
+	//++++++++++++++++++++++++++++++++++++++++++++++
+	public static byte[] serialize(Object obj) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ObjectOutputStream os = new ObjectOutputStream(out);
+		os.writeObject(obj);
+		return out.toByteArray();
+	}
+
+
+//	private void sendPacket() throws IOException, SocketException, UnknownHostException {
+//		DatagramSocket socket = new DatagramSocket();
+////		byte buffer[] = new byte[65535];
+////		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+//		byte buffer[] = new byte[1];
+//		InetAddress address = InetAddress.getByName("192.168.2.238");
+//		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, 3001);
+//		socket.send(packet);
+//		socket.close();
+//		try {
+//			//Dieses Objekt wird gecastet.
+////			logWriter((AuditLogPDU) deserialize(packet.getData()));
+//			logWriter((AuditLogPDU) serialize(packet.setData()));
+//		}catch (Exception e){
+//			log.error(e.getMessage());
+//		}
+//
+//	}
+
+	//++++++++++++++++++++++++++++++++++++++++++++++
+
+
 	@Override
 	//(Verschicken der Nachrichten zwischen den Clients)
 	protected void chatMessageRequestAction(ChatPDU receivedPdu) {
@@ -226,26 +257,25 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 //				InetAddress address = new InetAddress.getByAddress(ipv4Address);
 				InetAddress address = InetAddress.getByName("192.168.2.238");
 
-				byte buffer[] = new byte[1];
+//				byte buffer[] = new byte[1];
+				AuditLogPDU auditLogPDUObject = new AuditLogPDU(PduType.CHAT_MESSAGE_REQUEST, receivedPdu.getUserName(), receivedPdu.getServerThreadName(), receivedPdu.getClientThreadName(), receivedPdu.getMessage());
+
+
+				byte buffer[] = serialize(auditLogPDUObject);
 				DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, 3001);
 
-				log.error("hi ");
+
+
+
+//				log.error("hi ");
 				socket.send(packet);
-				log.error("hi2 ");
+
+//				log.error("hi2 ");
 				socket.close();
-				log.error("hi3");
+//				log.error("hi3");
 			}catch (Exception e){
 				log.error(e.getMessage());
 			}
-
-//
-//				protected void sendPacket() throws IOException {
-//				socket.send(packet);
-//				System.out.println("gesendet");
-//				}
-
-
-
 
 			//+++++++++++++++++
 
