@@ -1,43 +1,58 @@
 package edu.hm.dako.chat.server;
 
+import com.sun.security.ntlm.Client;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.*;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
 import java.util.concurrent.ExecutorService;
 
 
 public class AuditLogServerImpl extends AbstractAuditLogServer {
 
+    /**
+     * @author Diana Marjanovic
+     *
+     */
+
+    /////////////////////////////////////
+    private static final int Portnumber = 3000;
 
     private static Log log = LogFactory.getLog(AuditLogServerImpl.class);
 
     // Threadpool fuer Worker-Threads
     private ExecutorService executorService;
 
+
     // Socket fuer den Listener, der alle Verbindungsaufbauwuensche der Clients
-    // entgegennimmt
+    // entgegennimmt (UDP)
     private DatagramSocket socket;
 
-    //BufferedWriter als Objektvariable.
+    // Ein Socket für den TCP, der auch die Anfragen überprüft. ---------------------
+    private ServerSocket serverSocket;
+    private InetAddress inetAddress;
+
+
+    //BufferedWriter als Objektvariable, den wir für unsere Datei brauchen.
     private BufferedWriter bufferedWriter;
 
 
-    //Einen Konstruktor erstellen mit einem Executor und Socket.
-    public AuditLogServerImpl(ExecutorService executorService, DatagramSocket socket) throws SocketException {
+    //Einen Konstruktor erstellen mit einem Executor und Socket bzw. die beiden Sockets. ---------
+    public AuditLogServerImpl(ExecutorService executorService, DatagramSocket socket, ServerSocket serverSocket, InetAddress inetAddress) throws SocketException {
         log.debug("AuditLogServerImpl konstruiert");
         this.executorService = executorService;
         this.socket = socket;
+        this.serverSocket = serverSocket;
+        this.inetAddress = inetAddress;
     }
 
 
-    //Datagramsocket erstellen mit einem Portnummer.
+    //--------------------------------------------------------
+    //Datagramsocket erstellen mit einem Portnummer und einen ServerSocket erstellen mit einem Portnummer..
     public AuditLogServerImpl (int port) throws IOException {
         socket = new DatagramSocket(port);
+        serverSocket = new ServerSocket(port);
     }
 
 
@@ -127,4 +142,33 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     public void run() {
 
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Java-Rumpf für einen TCP-Server
+    /* Java-Rumpf für einen TCP-Server */
+//    ServerSocket server = new ServerSocket(Portnummer);
+    // Beispiel mit einem Thread, der auf einen Verbindungsaufbauwunschwartet,
+    // den Client bedient, die Verbindung anschließend wieder beendet und
+    // auf die nächste Anfrage wartet.
+//            while (true) {
+//            Socket incoming = server.accept();
+//            ObjectInputStream in;
+//            ObjectOutputStream out;
+//                try {
+//                    out = new ObjectOutputStream(incoming.getOutputStream());
+//                    in = new ObjectInputStream(incoming.getInputStream());
+//                    // Empfangen über Inputstream
+//                    AuditLogPDU pdu = (AuditLogPDU) in.readObject();
+//                    // Empfangene PDU verarbeiten
+//
+//                    // Senden über OutputStream
+//                    // AuditLogPDU ist eine eigene Objektklasse
+//                    out.writeObject(new AuditLogPDU());
+//                    // Stream und Verbindung schließen
+//                    incoming.close();
+//                    }
+//                    catch (Exception e) {
+//                    }
+//            }
 }
