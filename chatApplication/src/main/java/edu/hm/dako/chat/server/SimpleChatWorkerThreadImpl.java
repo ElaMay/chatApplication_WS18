@@ -232,6 +232,81 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 
 	//++++++++++++++++++++++++++++++++++++++++++++++
 
+	private InetAddress address;
+	private int port;
+	private boolean udp;
+	private Socket tcpSocket;
+	private DatagramSocket udpSocket;
+
+	public boolean startAuditLog(){
+
+		// Get Info from ChatServerGUI
+		this.udp = ChatServerGUI.auditUseUDP.isSelected();
+		this.port = Integer.parseInt(ChatServerGUI.auditlogPort.getText());
+		try {
+			address = InetAddress.getByName(ChatServerGUI.auditlogIP.getText());
+		}
+		catch (UnknownHostException e) {
+			return false; // Start failed
+		}
+
+		//				byte[] ipv4Address = new byte[] { (byte)192, (byte)168, (byte)2, (byte)238};
+		// 				InetAddress address = new InetAddress.getByAddress(ipv4Address);
+
+		if(udp){
+			try {
+				//+++++++++++++++++
+				//hier socket öffnen
+				udpSocket = new DatagramSocket();
+
+			}catch (Exception e){
+				log.error(e.getMessage());
+				return false;
+			}
+		}
+		else {
+			try {
+				tcpSocket = new Socket(address, port);
+			}
+			catch (IOException e){
+				log.error(e.getMessage());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void stopAuditLog() {
+
+		//TODO: Shutdownmessage an AuditlogServer senden
+
+		try{
+			if(udp)
+				udpSocket.close();
+			else
+				tcpSocket.close();
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	private void sendAudit(ChatPDU receivedPdu) throws IOException{
+		new AuditLogPDU(receivedPdu.getPduType(), receivedPdu.getUserName(), receivedPdu.getServerThreadName(), receivedPdu.getClientThreadName(), receivedPdu.getMessage());
+		if(udp){
+
+			byte buffer[] = serialize(receivedPdu);
+			DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, port);
+			udpSocket.send(packet);
+		}
+		else {
+			ObjectOutputStream oos = new ObjectOutputStream(tcpSocket.getOutputStream());
+			oos.writeObject(receivedPdu);
+			oos.flush();
+		}
+	}
+
+
 
 	@Override
 	//(Verschicken der Nachrichten zwischen den Clients)
@@ -247,37 +322,7 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		if (!clients.existsClient(receivedPdu.getUserName())) {
 			log.debug("User nicht in Clientliste: " + receivedPdu.getUserName());
 		} else {
-			//+++++++++++++++++
-			//hier socket öffnen und an AuditLogServer senden.
 
-			try {
-				DatagramSocket socket = new DatagramSocket();
-
-//				byte[] ipv4Address = new byte[] { (byte)192, (byte)168, (byte)2, (byte)238};
-//				InetAddress address = new InetAddress.getByAddress(ipv4Address);
-				InetAddress address = InetAddress.getByName("192.168.2.238");
-
-//				byte buffer[] = new byte[1];
-				AuditLogPDU auditLogPDUObject = new AuditLogPDU(PduType.CHAT_MESSAGE_REQUEST, receivedPdu.getUserName(), receivedPdu.getServerThreadName(), receivedPdu.getClientThreadName(), receivedPdu.getMessage());
-
-
-				byte buffer[] = serialize(auditLogPDUObject);
-				DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, 3001);
-
-
-
-
-//				log.error("hi ");
-				socket.send(packet);
-
-//				log.error("hi2 ");
-				socket.close();
-//				log.error("hi3");
-			}catch (Exception e){
-				log.error(e.getMessage());
-			}
-
-			//+++++++++++++++++
 
 			// Liste der betroffenen Clients ermitteln, (die drinnen sind)
 			Vector<String> sendList = clients.getClientNameList();
@@ -497,18 +542,21 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 			switch (receivedPdu.getPduType()) {
 
 				case LOGIN_REQUEST:
+					sendAudit(receivedPdu);
 					// Login-Request vom Client empfangen
 					// an AuditLog Server
 					loginRequestAction(receivedPdu);
 					break;
 
 				case CHAT_MESSAGE_REQUEST:
+					sendAudit(receivedPdu);
 					// an AuditLog Server
 					// Chat-Nachricht angekommen, an alle verteilen
 					chatMessageRequestAction(receivedPdu);
 					break;
 
 				case LOGOUT_REQUEST:
+					sendAudit(receivedPdu);
 					// an AuditLog Server
 					// Logout-Request vom Client empfangen
 					logoutRequestAction(receivedPdu);

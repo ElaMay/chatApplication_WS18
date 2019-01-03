@@ -28,7 +28,7 @@ public class AuditLogPDU implements Serializable {
     private String userName;
     private String serverThread;
     private String clientThread;
-    private String messageContent;
+    private String messageContent = "";
     private Date date;
     private ChatPDU receivedPdu;
 
@@ -46,15 +46,6 @@ public class AuditLogPDU implements Serializable {
         this.messageContent = null;
     }
 
-    public AuditLogPDU(PduType type, String userName, String serverThread, String clientThread){
-        this.type = type;
-        this.date = new Date();     //hier date erzeugen
-        this.userName = userName;
-        this.serverThread = serverThread;
-        this.clientThread = clientThread;
-    }
-
-
     public AuditLogPDU (PduType type, String userName, String serverThread, String clientThread, String messageContent ){
         this.type = type;
         this.date = new Date();     //hier date erzeugen
@@ -71,7 +62,8 @@ public class AuditLogPDU implements Serializable {
 
     public String toString() {
 
-        switch (receivedPdu.getPduType()) {
+       // switch (receivedPdu.getPduType()) {
+        switch (this.getType()) {
 
             //Für ChatRequest wird Nachrichten Inhalt mitgeschickt
             case CHAT_MESSAGE_REQUEST:

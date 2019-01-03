@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javafx.scene.control.*;
 import javafx.stage.WindowEvent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,12 +23,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -123,7 +118,7 @@ public class ChatServerGUI extends Application implements ChatServerGuiInterface
 	public void start(final Stage stage) throws Exception {
 
 		stage.setTitle("ChatServerGUI");
-		stage.setScene(new Scene(pane, 335, 350));
+		stage.setScene(new Scene(pane, 335, 500));
 		stage.show();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -149,11 +144,61 @@ public class ChatServerGUI extends Application implements ChatServerGuiInterface
 		pane.getChildren().add(createSeperator("", 310));
 		pane.getChildren().add(createButtonPane());
 
+		pane.getChildren().add(createSeperator("Audit Logging", 235));
+		pane.getChildren().add(createAuditPane());
+
 		reactOnStartButton();
 		reactOnStopButton();
 		reactOnFinishButton();
 		stopButton.setDisable(true);
 	}
+
+
+	// Standards for Audit Log server -------------------------------------------------------
+	static final String DEFAULT_AUDIT_LOG_IP = "127.0.0.1";
+	static final String DEFAULT_AUDIT_LOG_PORT = "4445";
+	public static TextField auditlogIP;
+	public static TextField auditlogPort;
+	private Label auditlogIPLabel;
+	private Label auditlogPortLabel;
+	public static RadioButton auditUseUDP;
+
+	/**
+	 * AuditLog-Pane erzeugen
+	 *
+	 * @return pane
+	 */
+	private GridPane createAuditPane() {
+		final GridPane inputPane = new GridPane();
+
+		Label label = new Label("ConnectionType: ");
+		ToggleGroup auditlogConnection = new ToggleGroup();
+		auditUseUDP = new RadioButton("UDP");
+		RadioButton r2 = new RadioButton("TCP");
+		auditUseUDP.setToggleGroup(auditlogConnection);
+		auditUseUDP.setSelected(true);
+		r2.setToggleGroup(auditlogConnection);
+		HBox p = new HBox();
+		p.getChildren().add(auditUseUDP);
+		p.getChildren().add(r2);
+
+		auditlogIPLabel = createLabel("IP Adresse des AuditLogSevers");
+		auditlogPortLabel= createLabel("Port Nummer des AuditLogSevers");
+
+		auditlogIP = createEditableTextfield(DEFAULT_AUDIT_LOG_IP);
+		auditlogPort = createEditableTextfield(DEFAULT_AUDIT_LOG_PORT);
+
+		inputPane.add(label, 1,1);
+		inputPane.add(p,3,1);
+		inputPane.add(auditlogIPLabel, 1, 3);
+		inputPane.add(auditlogIP, 3, 3);
+		inputPane.add(auditlogPortLabel, 1, 5);
+		inputPane.add(auditlogPort, 3, 5);
+
+		return inputPane;
+	}
+
+	// -------------------------------------------------- End Customisations
 
 	/**
 	 * Eingabe-Pane erzeugen
@@ -349,6 +394,7 @@ public class ChatServerGUI extends Application implements ChatServerGuiInterface
 					} catch (Exception e) {
 						setAlert(
 								"Der Server konnte nicht gestartet werden, evtl. laeuft ein anderer Server mit dem Port");
+						e.printStackTrace();
 						return;
 					}
 
@@ -427,6 +473,8 @@ public class ChatServerGUI extends Application implements ChatServerGuiInterface
 		return (implType);
 	}
 
+
+
 	/**
 	 * Chat-Server starten
 	 * 
@@ -441,7 +489,6 @@ public class ChatServerGUI extends Application implements ChatServerGuiInterface
 	 */
 	private void startChatServer(String implType, int serverPort, int sendBufferSize,
 			int receiveBufferSize) throws Exception {
-
 		ImplementationType serverImpl = null;
 		if (implType.equals(SystemConstants.IMPL_TCP_SIMPLE)) {
 			serverImpl = ImplementationType.TCPSimpleImplementation;

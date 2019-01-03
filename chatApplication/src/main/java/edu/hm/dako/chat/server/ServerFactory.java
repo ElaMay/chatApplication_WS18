@@ -66,7 +66,7 @@ public final class ServerFactory {
 			}
 
 		default:
-			System.out.println("Dezeit nur TCP implementiert!");
+			System.out.println("Derzeit nur TCP implementiert!");
 			throw new RuntimeException("Unknown type: " + implType);
 		}
 	}

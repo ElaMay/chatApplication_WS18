@@ -89,4 +89,5 @@ public abstract class AbstractWorkerThread extends Thread {
 	 * @throws Exception
 	 */
 	protected abstract void handleIncomingMessage() throws Exception;
+
 }

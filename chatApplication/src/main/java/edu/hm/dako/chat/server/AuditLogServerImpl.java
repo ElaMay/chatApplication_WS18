@@ -1,12 +1,12 @@
 package edu.hm.dako.chat.server;
 
 import com.sun.security.ntlm.Client;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import edu.hm.dako.chat.common.PduType;
 
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.ExecutorService;
+
 
 
 public class AuditLogServerImpl extends AbstractAuditLogServer {
@@ -19,61 +19,69 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     /////////////////////////////////////
     private static final int Portnumber = 3000;
 
-    private static Log log = LogFactory.getLog(AuditLogServerImpl.class);
-
     // Threadpool fuer Worker-Threads
-    private ExecutorService executorService;
+    private boolean upd;
+
+    private boolean running = true;
 
 
     // Socket fuer den Listener, der alle Verbindungsaufbauwuensche der Clients
     // entgegennimmt (UDP)
-    private DatagramSocket socket;
+    //private DatagramSocket socket;
+    private Socket tcpSocket;
+    private DatagramSocket udpSocket;
 
     // Ein Socket für den TCP, der auch die Anfragen überprüft. ---------------------
-    private ServerSocket serverSocket;
-    private InetAddress inetAddress;
+    //private ServerSocket serverSocket;
+    //private InetAddress inetAddress;
+    //private Socket Client;
 
 
     //BufferedWriter als Objektvariable, den wir für unsere Datei brauchen.
     private BufferedWriter bufferedWriter;
 
-
     //Einen Konstruktor erstellen mit einem Executor und Socket bzw. die beiden Sockets. ---------
-    public AuditLogServerImpl(ExecutorService executorService, DatagramSocket socket, ServerSocket serverSocket, InetAddress inetAddress) throws SocketException {
-        log.debug("AuditLogServerImpl konstruiert");
-        this.executorService = executorService;
-        this.socket = socket;
-        this.serverSocket = serverSocket;
-        this.inetAddress = inetAddress;
+    public AuditLogServerImpl(boolean isUpd, int port) throws SocketException, IOException {
+        this.upd = isUpd;
+        if(upd)
+            udpSocket = new DatagramSocket(port);
+        else
+            tcpSocket = new ServerSocket(port).accept();
+
+        System.out.println(port);
+      //  this.serverSocket = serverSocket;
+      //  this.inetAddress = inetAddress;
     }
+    //, ServerSocket serverSocket, InetAddress inetAddress
 
 
     //--------------------------------------------------------
     //Datagramsocket erstellen mit einem Portnummer und einen ServerSocket erstellen mit einem Portnummer..
     public AuditLogServerImpl (int port) throws IOException {
-        socket = new DatagramSocket(port);
-        serverSocket = new ServerSocket(port);
+        this(true,port);
+       // serverSocket = new ServerSocket(port);
     }
 
 
     //Zum Starten und in dem Fall öffnen der Dateien, damit wir reinschreiben können.
-    public void start() {
-        FileWriter fw = null;
-        try {
-            //Dateinamen selber erstellen, Klassenname als String und die Zeit und die log auch als String.
-            fw = new FileWriter("SimpleChatServerImpl" + System.currentTimeMillis() + ".log");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void start() throws IOException {
+        //Dateinamen selber erstellen, Klassenname als String und die Zeit und die log auch als String.
+        FileWriter fw = new FileWriter("SimpleChatServerImpl" + System.currentTimeMillis() + ".log");
         bufferedWriter = new BufferedWriter(fw);
         System.currentTimeMillis();
+        System.out.println("Logserver started");
     }
 
 
     //Eine Methode für die Packete, die wir dann erhalten.
-    public void execute () throws IOException {
-        while (true) {
-            receivePacket();
+    public void execute () {
+        while (running) {
+            try {
+                receivePacket();
+            }
+            catch (IOException e){
+                e.printStackTrace(); //TODO: besseres Errorhandling
+            }
             //sendMessage (packet.getAddress(), packet.getPort(), packet.getData(), packet.getLength());
         }
     }
@@ -89,17 +97,38 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
 
     //Die Nachrichten, die dann empfangen werden. Diese Methode besitzt keine Eingabe.
     private void receivePacket() throws IOException {
-        byte buffer[] = new byte[65535];
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-        socket.receive(packet);
-        try {
-            //Dieses Objekt wird gecastet.
-            logWriter((AuditLogPDU) deserialize(packet.getData()));
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        AuditLogPDU receivedPDU = null;
+
+        if(upd) {// Using UDP
+            byte buffer[] = new byte[65535];
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+            udpSocket.receive(packet);
+            try {
+                receivedPDU = (AuditLogPDU) deserialize(packet.getData());
+                this.logWriter(receivedPDU);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace(); //TODO: errorhandling
+            }
+            //TODO System outs entfernen
+            System.out.println("Received " + packet.getLength() + " bytes. ");
+            System.out.println(packet);
+
+
         }
-        //System.out.println("Received " + packet.getLength() + " bytes. ");
-        //System.out.println(packet);
+        else { // Using TCP
+            ObjectInputStream obj = new ObjectInputStream(tcpSocket.getInputStream());
+            try {
+                receivedPDU = (AuditLogPDU) obj.readObject();
+                this.logWriter(receivedPDU);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace(); //TODO: errorhandling
+            }
+        }
+
+        if(receivedPDU.getType() == PduType.SHUTDOWN_EVENT){
+            this.stop();
+        }
+
     }
 
 
@@ -108,7 +137,9 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     //Die Variable logNew gilt innerhalb dieser Methode nur. Verlässt er diese Methode, wird der reservierte Speicher frei gegeben.
     //Diese Methode besitzt keine Ausgabe.
     private void logWriter(AuditLogPDU logNew) throws IOException {
+        //System.out.println(logNew.toString());
         bufferedWriter.write(logNew.toString());
+        bufferedWriter.flush();
     }
 
 
@@ -121,12 +152,15 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
 
 
     //Zum Schließen der Dateien, damit nichts mehr geschrieben wird.
-    public void stop() {
-        try {
-            bufferedWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void stop() throws IOException {
+        if(upd) {
+
         }
+        else {
+
+        }
+        bufferedWriter.close();
+        running = false;
     }
 
 
@@ -135,7 +169,9 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
         if (args.length != 1)
             throw new RuntimeException("Syntax: AuditLogServerImpl <port>");
         AuditLogServerImpl server = new AuditLogServerImpl(Integer.parseInt(args[0]));
+        server.start();
         server.execute();
+        server.stop();
     }
 
 

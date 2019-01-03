@@ -14,6 +14,7 @@ import edu.hm.dako.chat.common.ExceptionHandler;
 import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.ServerSocketInterface;
 import javafx.concurrent.Task;
+import java.io.IOException;
 
 //import static edu.hm.dako.chat.server.ServerFactory.getDecoratedServerSocket; //später wieder einkommentieren (Sophia)
 
@@ -55,18 +56,23 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 		counter.eventCounter = new AtomicInteger(0);
 		counter.confirmCounter = new AtomicInteger(0);
 		//AuditLog (UDP)
-		try {
-			auditServer = new AuditLogServerImpl(Executors.newCachedThreadPool(), new DatagramSocket(4445));
-		} catch (Throwable e) {
-			log.error("Could not create AuditLogServer!");
-		}
+//		try {
+//			auditServer = new AuditLogServerImpl(Executors.newCachedThreadPool(), new DatagramSocket(4445));
+//		} catch (Throwable e) {
+//			log.error("Could not create AuditLogServer!");
+//		}
 
 	}
 
 	@Override
 	public void start() {
 		//Start vom Server des AuditLogs
-		auditServer.start();	///+++++++++++++++++ später in einem anderem packet machen
+//		try {
+//			auditServer.start();    ///+++++++++++++++++ später in einem anderem packet machen
+//		}
+//		catch (IOException e){
+//			log.error("Could not create AuditLogServer output File!");
+//		}
 
 		Task<Void> task = new Task<Void>() {
 			@Override

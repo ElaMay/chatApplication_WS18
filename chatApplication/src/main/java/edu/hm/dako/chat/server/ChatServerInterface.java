@@ -18,4 +18,7 @@ public interface ChatServerInterface {
 	 * @throws Exception
 	 */
 	void stop() throws Exception;
+
+
+
 }

@@ -1,5 +1,7 @@
 package edu.hm.dako.chat.server;
 
+import java.io.IOException;
+
 public interface AuditLogServerInterface {
 
     /**
@@ -7,7 +9,7 @@ public interface AuditLogServerInterface {
      *
      */
 
-    public void start();
+    public void start() throws IOException;
 
-    public void stop();
+    public void stop() throws IOException;
 }
