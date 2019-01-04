@@ -16,7 +16,7 @@ public enum PduType {
     CHAT_MESSAGE_EVENT(7, "Chat-Message-Event"),
     LOGIN_EVENT(8, "Login-Event"),
     LOGOUT_EVENT(9, "Logout-Event"),
-    SHUTDOWN_EVENT(10, "shotdown");
+    SHUTDOWN_EVENT(10, "Shutdown-Event"); //Erweiterung um Shutdown, um den Shutdown auch in das Dokument zu schreiben
 
     private final int id;
     private final String description;
