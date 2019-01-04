@@ -117,4 +117,8 @@ public class AuditLogger {
         os.writeObject(obj);
         return out.toByteArray();
     }
+
+    public OutputType getOutputType() {
+        return outputType;
+    }
 }

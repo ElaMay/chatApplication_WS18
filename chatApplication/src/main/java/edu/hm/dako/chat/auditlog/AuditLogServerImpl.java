@@ -34,6 +34,7 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     //private Socket Client;
 
 
+    //TODO: Fuer this.upd einen Setter schreiben und am Anfang von Execute den setzen.
     //BufferedWriter als Objektvariable, den wir für unsere Datei brauchen.
     private BufferedWriter bufferedWriter;
 
