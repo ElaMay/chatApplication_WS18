@@ -1,7 +1,8 @@
-package edu.hm.dako.chat.server;
+package edu.hm.dako.chat.auditlog;
 
 import edu.hm.dako.chat.common.ChatPDU;
 import edu.hm.dako.chat.common.PduType;
+import edu.hm.dako.chat.server.ChatServerGUI;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

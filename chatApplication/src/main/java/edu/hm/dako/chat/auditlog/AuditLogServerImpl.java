@@ -1,12 +1,9 @@
-package edu.hm.dako.chat.server;
+package edu.hm.dako.chat.auditlog;
 
-import com.sun.security.ntlm.Client;
 import edu.hm.dako.chat.common.PduType;
 
 import java.io.*;
 import java.net.*;
-import java.util.concurrent.ExecutorService;
-
 
 
 public class AuditLogServerImpl extends AbstractAuditLogServer {

@@ -1,4 +1,4 @@
-package edu.hm.dako.chat.server;
+package edu.hm.dako.chat.auditlog;
 
 import java.io.IOException;
 

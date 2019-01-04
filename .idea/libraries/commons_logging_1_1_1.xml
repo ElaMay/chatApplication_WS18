@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="commons-logging-1.1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/commons-math3-3.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/jgoodies-common-1.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/jgoodies-forms-1.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/jgroups-3.4.2.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/jms-2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/junit-4.8.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/log4j-1.2.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/metrics.jar!/" />
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/netty-all-4.0.0.final.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/chatApplication/lib/commons-math3-3.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
