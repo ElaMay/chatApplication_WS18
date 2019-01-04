@@ -1,14 +1,12 @@
 package edu.hm.dako.chat.server;
 
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import edu.hm.dako.chat.auditlog.AuditLogServerInterface;
+import edu.hm.dako.chat.auditlog.AuditLogger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -17,7 +15,6 @@ import edu.hm.dako.chat.common.ExceptionHandler;
 import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.ServerSocketInterface;
 import javafx.concurrent.Task;
-import java.io.IOException;
 
 //import static edu.hm.dako.chat.server.ServerFactory.getDecoratedServerSocket; //später wieder einkommentieren (Sophia)
 
@@ -66,7 +63,7 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 			auditLogger = AuditLogger.getInstance();
 		}
 		catch (UnknownHostException e) {
-			log.error("AuditLog konnte nicht gestartet werden");
+			log.error("auditlog konnte nicht gestartet werden");
 		}
 
 	}
@@ -89,7 +86,7 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 
 						Connection connection = socket.accept();
 						log.debug("Neuer Verbindungsaufbauwunsch empfangen");
-						// eine Nachricht an AuditLog Server, dass eine Connection kommt
+						// eine Nachricht an auditlog Server, dass eine Connection kommt
 						// Neuen Workerthread starten
 						executorService.submit(new SimpleChatWorkerThreadImpl(connection, clients,
 								counter, serverGuiInterface));

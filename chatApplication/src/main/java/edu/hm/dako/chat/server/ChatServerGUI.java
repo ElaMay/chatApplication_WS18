@@ -164,7 +164,7 @@ public class ChatServerGUI extends Application implements ChatServerGuiInterface
 	public static RadioButton auditUseUDP;
 
 	/**
-	 * AuditLog-Pane erzeugen
+	 * auditlog-Pane erzeugen
 	 *
 	 * @return pane
 	 */

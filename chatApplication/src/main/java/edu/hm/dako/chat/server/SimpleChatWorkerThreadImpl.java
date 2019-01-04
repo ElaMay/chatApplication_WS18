@@ -1,11 +1,9 @@
 package edu.hm.dako.chat.server;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.Vector;
 
+import edu.hm.dako.chat.auditlog.AuditLogger;
 import edu.hm.dako.chat.common.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,7 +32,7 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 			auditLogger = AuditLogger.getInstance();
 		}
 		catch (UnknownHostException e) {
-			log.error("AuditLog konnte nicht gestartet werden");
+			log.error("auditlog konnte nicht gestartet werden");
 		}
 	}
 
@@ -477,20 +475,20 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 				case LOGIN_REQUEST:
 					auditLogger.sendAudit(receivedPdu);
 					// Login-Request vom Client empfangen
-					// an AuditLog Server
+					// an auditlog Server
 					loginRequestAction(receivedPdu);
 					break;
 
 				case CHAT_MESSAGE_REQUEST:
 					auditLogger.sendAudit(receivedPdu);
-					// an AuditLog Server
+					// an auditlog Server
 					// Chat-Nachricht angekommen, an alle verteilen
 					chatMessageRequestAction(receivedPdu);
 					break;
 
 				case LOGOUT_REQUEST:
 					auditLogger.sendAudit(receivedPdu);
-					// an AuditLog Server
+					// an auditlog Server
 					// Logout-Request vom Client empfangen
 					logoutRequestAction(receivedPdu);
 					break;
