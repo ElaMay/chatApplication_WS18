@@ -42,7 +42,7 @@ public class ListOfClients {
      * @return
      */
     public ClientStatistic getClient (String clientName) {
-        for (int i = 1; i < clientList.size(); i++) {
+        for (int i = 0  ; i < clientList.size(); i++) {
             if (clientList.get(i).getClientName().matches(clientName)) {
                 return clientList.get(i);
             } else {
@@ -52,4 +52,7 @@ public class ListOfClients {
         return null;
     }
 
+    public ClientStatistic getClientsByIndex (int index) {
+        return clientList.get(index);
+    }
 }

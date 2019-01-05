@@ -20,8 +20,12 @@ public class Administration {
 
     private BufferedReader bufferedReader;
 
+    private ListOfClients clients = new ListOfClients();
 
-    private static void loadFile(String fileName) {
+    int messageCounter = 0;
+
+
+    private void loadFile(String fileName) {
         File file = new File(fileName);
 
         if (!file.canRead() || !file.isFile())
@@ -35,28 +39,85 @@ public class Administration {
             while ((line = in.readLine()) != null) {
                 //System.out.println("Gelesene Zeile: " + line);
                 //TODO: Magic
-                if (line.startsWith("A")) {
-                    //ToDo: do nothing.
-                } else if (line.startsWith("P")) {
-                    //ToDo: pdu-type checken.
-                    //ToDo: Wenn es ein logIn ist, dann überprüfen, ob client existiert. Wenn nicht, in die Liste neu einfügen, LogIn setzen.
-                    //ToDo: Wenn ChatMessageRequest -> Client finden, Massege counter erhöhen.
-                    //ToDo: Wenn LogOut -> Client finden, LogOut setzen.
-                }  else if (line.startsWith("D")) {
+                String[] s = line.split("/");
 
-                }  else if (line.startsWith("u")) {
+                //Für den Fall, falls wir es brauchen sollten.
+                if(s.length == 6) {
+                    String s1 = s[0]; //ClientName
+                    String s2 = s[1]; //PDU-Type
+                    String s3 = s[2]; //Time-Stamp
+                    String s4 = s[3]; //Server-Thread
+                    String s5 = s[4]; //Client-Thread
+                    String s6 = s[5]; //Message
 
-                }  else if (line.startsWith("w")) {
+                    if (s1.equals(clients.getClient(s1).getClientName())) {
+                        if (s2.equals("Login-Request")) {
+                            clients.getClient(s1).setLoginTimestamp(s3);
+                            //Wenn ein Login bereits stattfand, dann wird der TimeStamp überschrieben.
+                        } else if (s2.equals("Logout-Request")) {
+                            clients.getClient(s1).setLogoutTimestamp(s3);
+                        } else if (s2.equals("Chat-Message-Request")) {
+                            clients.getClient(s1).setMessageCounter(clients.getClient(s1).getMessageCounter()+1);
+                            messageCounter = messageCounter + 1;
+                        } else {
+                            //ToDo: do nothing
+                        }
+                    } else if (s1 != null) {
+                        if (s2.equals("Login-Request")) {
+                            ClientStatistic clientNew = new ClientStatistic();
+                            clientNew.setClientName(s1);
+                            clientNew.setLoginTimestamp(s3);
+                            clients.addClients(clientNew);
+                        } else {
+                            //ToDo: do nothing
+                        }
 
-                }  else if (line.startsWith("c")) {
+                    } else {
+                        //ToDO: do nothing.
+                    }
 
-                }  else if (line.startsWith("m")) {
+                } else if (s.length == 5) {
+                    String s1 = s[0]; //ClientName
+                    String s2 = s[1]; //PDU-Type
+                    String s3 = s[2]; //Time-Stamp
+                    String s4 = s[3]; //Server-Thread
+                    String s5 = s[4]; //Client-Thread
 
-                }  else if (line.startsWith("*")) {
-                    //ToDo: do nothing.
-                } else {
-                    //ToDo: do nothing.
+                    //if (s1.equals(clients.getClient(s1).getClientName())) {
+                    if (clients.getClient(s1) != null && s1.equals(clients.getClient(s1).getClientName())) { //ToDo: Nochmal anschauen!!!!!For + &&
+                        if (s2.equals("Login-Request")) {
+                            clients.getClient(s1).setLoginTimestamp(s3);
+                            //Wenn ein Login bereits stattfand, dann wird der TimeStamp überschrieben.
+                        } else if (s2.equals("Logout-Request")) {
+                            System.out.println("Lo");
+                            clients.getClient(s1).setLogoutTimestamp(s3);
+                        } else if (s2.equals("Chat-Message-Request")) {
+                            System.out.println("M");
+                            clients.getClient(s1).setMessageCounter(clients.getClient(s1).getMessageCounter()+1);
+                            messageCounter = messageCounter + 1;
+                        } else {
+                            //ToDo: do nothing
+                        }
+                    } else if (s1 != null) {
+                        if (s2.equals("Login-Request")) {
+                            ClientStatistic clientNew = new ClientStatistic();
+                            clientNew.setClientName(s1);
+                            clientNew.setLoginTimestamp(s3);
+                            clients.addClients(clientNew);
+                        } else {
+                            //ToDo: do nothing
+                        }
+
+                    } else {
+                        //ToDO: do nothing.
+                    }
                 }
+            }
+            System.out.println("Anzahl der insgesamt angemeldeten Clients: "+ clients.getListSize());
+            System.out.println("Anzahl der insgesamt gesendetetn Nachrichten: "+ messageCounter);
+
+            for (int i = 0; i < clients.getListSize(); i++) {
+               System.out.println(clients.getClientsByIndex(i).toString());
             }
 
         } catch (IOException e) {
@@ -66,6 +127,7 @@ public class Administration {
                 try {
                     in.close();
                 } catch (IOException e) {
+                    e.printStackTrace();
                 }
         }
     }
@@ -73,7 +135,8 @@ public class Administration {
 
     public static void main(String[] args) {
         String fileName = args[0];
-        loadFile(fileName);
+        Administration a = new Administration();
+        a.loadFile(fileName);
     }
 
 }
