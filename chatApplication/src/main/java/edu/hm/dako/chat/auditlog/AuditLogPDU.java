@@ -66,13 +66,14 @@ public class AuditLogPDU implements Serializable {
             //Für ChatRequest wird Nachrichten Inhalt mitgeschickt
             case CHAT_MESSAGE_REQUEST:
                 return "\n"
-                        + "userName: " + this.userName + "/" + "PduType: " + this.type + "/" + "Date: " + this.date + "/"+ "userName: " + this.userName
-                        + "/" + "workerThreadServer: " + this.serverThread + "/" + "clientThread: " + this.clientThread + "/" + "messageContent: " + this.messageContent + "\n";
+                         + this.userName + "/"  + this.type + "/"  + this.date + "/" + this.serverThread + "/"
+                         + this.clientThread + "/" + this.messageContent + "\n";
+
             //Für alle anderen nicht.
             default:
                 return "\n"
-                        + "userName: " + this.userName + "/" + "PduType: " + this.type + "/" + "Date: " + this.date + "/"+ "userName: " + this.userName
-                        + "/" + "workerThreadServer: " + this.serverThread + "/" + "clientThread: " + this.clientThread + "\n";
+                        + this.userName + "/" + this.type + "/" + this.date  + "/" + this.serverThread + "/"
+                        + this.clientThread + "\n";
 
 
 //            //Für ChatRequest wird Nachrichten Inhalt mitgeschickt
