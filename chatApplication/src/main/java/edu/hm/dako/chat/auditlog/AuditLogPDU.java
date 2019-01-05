@@ -66,21 +66,33 @@ public class AuditLogPDU implements Serializable {
             //Für ChatRequest wird Nachrichten Inhalt mitgeschickt
             case CHAT_MESSAGE_REQUEST:
                 return "\n"
-                        + "AuditLogPdu ****************************************************************************************************"
-                        + "\n" + "PduType: " + this.type + ", " +   "\n" + "Date: " + this.date + ", " + "\n" + "userName: " + this.userName
-                        + ", " + "\n" + "workerThreadServer: " + this.serverThread + ", " + "\n"
-                        + "clientThread: " + this.clientThread + ", " + "\n" + "messageContent: " + this.messageContent + "\n"
-                        + "**************************************************************************************************** AuditLogPdu"
-                        + "\n";
+                        + "userName: " + this.userName + "/" + "PduType: " + this.type + "/" + "Date: " + this.date + "/"+ "userName: " + this.userName
+                        + "/" + "workerThreadServer: " + this.serverThread + "/" + "clientThread: " + this.clientThread + "/" + "messageContent: " + this.messageContent + "\n";
             //Für alle anderen nicht.
             default:
                 return "\n"
-                        + "AuditLogPdu ****************************************************************************************************"
-                        + "\n" + "PduType: " + this.type + ", " +   "\n" + "Date: " + this.date + ", " + "\n" + "userName: " + this.userName
-                        + ", " + "\n" + "workerThreadServer: " + this.serverThread + ", " + "\n"
-                        + "clientThread: " + this.clientThread + "\n"
-                        + "**************************************************************************************************** AuditLogPdu"
-                        + "\n";
+                        + "userName: " + this.userName + "/" + "PduType: " + this.type + "/" + "Date: " + this.date + "/"+ "userName: " + this.userName
+                        + "/" + "workerThreadServer: " + this.serverThread + "/" + "clientThread: " + this.clientThread + "\n";
+
+
+//            //Für ChatRequest wird Nachrichten Inhalt mitgeschickt
+//            case CHAT_MESSAGE_REQUEST:
+//                return "\n"
+//                        + "AuditLogPdu ****************************************************************************************************"
+//                        + "\n" + "PduType: " + this.type + ", " +   "\n" + "Date: " + this.date + ", " + "\n" + "userName: " + this.userName
+//                        + ", " + "\n" + "workerThreadServer: " + this.serverThread + ", " + "\n"
+//                        + "clientThread: " + this.clientThread + ", " + "\n" + "messageContent: " + this.messageContent + "\n"
+//                        + "**************************************************************************************************** AuditLogPdu"
+//                        + "\n";
+//            //Für alle anderen nicht.
+//            default:
+//                return "\n"
+//                        + "AuditLogPdu ****************************************************************************************************"
+//                        + "\n" + "PduType: " + this.type + ", " +   "\n" + "Date: " + this.date + ", " + "\n" + "userName: " + this.userName
+//                        + ", " + "\n" + "workerThreadServer: " + this.serverThread + ", " + "\n"
+//                        + "clientThread: " + this.clientThread + "\n"
+//                        + "**************************************************************************************************** AuditLogPdu"
+//                        + "\n";
 
         }
     }
