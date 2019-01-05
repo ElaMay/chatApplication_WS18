@@ -166,7 +166,7 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     public static void main (String args[]) throws IOException {
         if (args.length != 1)
             throw new RuntimeException("Syntax: AuditLogServerImpl <port>");
-        AuditLogServerImpl server = new AuditLogServerImpl(Integer.parseInt(args[0]));
+        AuditLogServerImpl server = new AuditLogServerImpl(false, Integer.parseInt(args[0]));
         server.start();
         server.execute();
         server.stop();
