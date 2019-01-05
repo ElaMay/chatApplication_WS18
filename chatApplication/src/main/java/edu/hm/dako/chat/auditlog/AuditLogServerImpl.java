@@ -1,6 +1,7 @@
 package edu.hm.dako.chat.auditlog;
 
 import edu.hm.dako.chat.common.PduType;
+import edu.hm.dako.chat.server.ChatServerGUI;
 
 import java.io.*;
 import java.net.*;
@@ -17,9 +18,8 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     private static final int Portnumber = 3000;
 
     // Threadpool fuer Worker-Threads
-    private boolean upd;
-
-    private boolean running = true;
+    private boolean isUdp;
+    private boolean isRunning = true;
 
 
     // Socket fuer den Listener, der alle Verbindungsaufbauwuensche der Clients
@@ -34,14 +34,14 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     //private Socket Client;
 
 
-    //TODO: Fuer this.upd einen Setter schreiben und am Anfang von Execute den setzen.
+    //TODO: Fuer this.isUdp einen Setter schreiben und am Anfang von Execute den setzen.
     //BufferedWriter als Objektvariable, den wir für unsere Datei brauchen.
     private BufferedWriter bufferedWriter;
 
     //Einen Konstruktor erstellen mit einem Executor und Socket bzw. die beiden Sockets. ---------
     public AuditLogServerImpl(boolean isUpd, int port) throws SocketException, IOException {
-        this.upd = isUpd;
-        if(upd)
+        this.isUdp = isUpd;
+        if(isUdp)
             udpSocket = new DatagramSocket(port);
         else
             tcpSocket = new ServerSocket(port).accept();
@@ -73,7 +73,7 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
 
     //Eine Methode für die Packete, die wir dann erhalten.
     public void execute () {
-        while (running) {
+        while (isRunning) {
             try {
                 receivePacket();
             }
@@ -97,7 +97,7 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     private void receivePacket() throws IOException {
         AuditLogPDU receivedPDU = null;
 
-        if(upd) {// Using UDP
+        if(isUdp) {// Using UDP
             byte buffer[] = new byte[65535];
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
             udpSocket.receive(packet);
@@ -151,22 +151,31 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
 
     //Zum Schließen der Dateien, damit nichts mehr geschrieben wird.
     public void stop() throws IOException {
-        if(upd) {
+        if(isUdp) {
 
         }
         else {
 
         }
         bufferedWriter.close();
-        running = false;
+        isRunning = false;
     }
 
 
     //Die Main-Methode, mit der wir den AuditLogServer testen.
     public static void main (String args[]) throws IOException {
-        if (args.length != 1)
+        AuditLogServerImpl server;
+        if (args.length != 2)
             throw new RuntimeException("Syntax: AuditLogServerImpl <port>");
-        AuditLogServerImpl server = new AuditLogServerImpl(false, Integer.parseInt(args[0]));
+        String protocol = args[1];
+        if(protocol.equalsIgnoreCase("udp")){
+            server = new AuditLogServerImpl(true, Integer.parseInt(args[0]));
+        }else if(protocol.equalsIgnoreCase("tcp")){
+            server = new AuditLogServerImpl(false, Integer.parseInt(args[0]));
+        }else{
+            System.out.println("False Argument.");
+            return;
+        }
         server.start();
         server.execute();
         server.stop();
@@ -176,6 +185,8 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     public void run() {
 
     }
+
+    public void setUdp(boolean udp){ this.isUdp = udp;}
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
