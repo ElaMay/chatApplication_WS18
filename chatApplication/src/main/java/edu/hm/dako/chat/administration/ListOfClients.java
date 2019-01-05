@@ -10,7 +10,7 @@ public class ListOfClients {
 
 
     //Eine ArrayList wird für diese Klasse erzeugt.
-    ArrayList<String> clientList = new ArrayList<>();
+    private ArrayList<ClientStatistic> clientList = new ArrayList<>();
 
 
     //Konstruktor für diese Klasse.
@@ -20,11 +20,36 @@ public class ListOfClients {
 
 
     /**
-     * Zählt alle Clients in einer Liste zusammen und filtert alle Namen raus.
+     * Liefert die Anzahl der Clients in ArrayList.
      */
-    public void filter() {
+    public int getListSize() {
+        return clientList.size();
+    }
 
+
+    /**
+     * Speichert alle Clients in einer Liste.
+     */
+    public void addClients(ClientStatistic newClient) {
+        clientList.add(newClient);
         // String[] clients = new String[];
+    }
+
+
+    /**
+     * Liefert den Namen aus der Liste.
+     * @param clientName
+     * @return
+     */
+    public ClientStatistic getClient (String clientName) {
+        for (int i = 1; i < clientList.size(); i++) {
+            if (clientList.get(i).getClientName().matches(clientName)) {
+                return clientList.get(i);
+            } else {
+                //ToDo: do nothing.
+            }
+        }
+        return null;
     }
 
 }
