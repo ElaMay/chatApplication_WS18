@@ -163,7 +163,8 @@ public class AuditLogPDU implements Serializable {
         pdu.setType(PduType.LOGIN_EVENT);
         pdu.setDate(date);
         pdu.setUserName(userName);
-        pdu.setServerThread(Thread.currentThread().getName());
+//        pdu.setServerThread(Thread.currentThread().getName());
+        pdu.setServerThread(receivedPdu.getServerThreadName());
         pdu.setClientThread(receivedPdu.getClientThreadName());
 
         return pdu;
@@ -175,7 +176,8 @@ public class AuditLogPDU implements Serializable {
         pdu.setType(PduType.LOGOUT_EVENT);
         pdu.setDate(date);
         pdu.setUserName(userName);
-        pdu.setServerThread(Thread.currentThread().getName());
+//        pdu.setServerThread(Thread.currentThread().getName());
+        pdu.setServerThread(receivedPdu.getServerThreadName());
         pdu.setClientThread(receivedPdu.getClientThreadName());
 
         return pdu;
@@ -185,7 +187,8 @@ public class AuditLogPDU implements Serializable {
 
         AuditLogPDU pdu = new AuditLogPDU();
         pdu.setType(PduType.CHAT_MESSAGE_EVENT);
-        pdu.setServerThread(Thread.currentThread().getName());
+//        pdu.setServerThread(Thread.currentThread().getName());
+        pdu.setServerThread(receivedPdu.getServerThreadName());
         pdu.setClientThread(receivedPdu.getClientThreadName());
         pdu.setUserName(userName);
         pdu.setMessageContent(receivedPdu.getMessage());

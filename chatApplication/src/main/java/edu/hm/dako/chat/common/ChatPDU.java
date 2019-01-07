@@ -152,6 +152,8 @@ public class ChatPDU implements Serializable {
 
 	public void setServerThreadName(String threadName) {
 		this.serverThreadName = threadName;
+//		System.out.println("bla\""+this.serverThreadName+"\"");
+		//TODO: dfgd
 	}
 
 	public void setMessage(String msg) {

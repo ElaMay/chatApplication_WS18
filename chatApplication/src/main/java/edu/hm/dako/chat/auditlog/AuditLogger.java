@@ -89,6 +89,8 @@ public class AuditLogger {
 
     public void sendAudit(ChatPDU receivedPdu){
         AuditLogPDU auditLog = new AuditLogPDU(receivedPdu.getPduType(), receivedPdu.getUserName(), receivedPdu.getServerThreadName(), receivedPdu.getClientThreadName(), receivedPdu.getMessage());
+        System.out.println("4\""+Thread.currentThread().getName()+"\"");
+        System.out.println("4.5\""+receivedPdu.getServerThreadName()+"\"");
         try {
             switch (outputType) {
                 case UDP:
