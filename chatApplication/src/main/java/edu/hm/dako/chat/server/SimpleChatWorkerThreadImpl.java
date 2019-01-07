@@ -424,8 +424,6 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		try {
 			receivedPdu = (ChatPDU) connection.receive(RECEIVE_TIMEOUT);
 			receivedPdu.setServerThreadName(Thread.currentThread().getName()); ///Bullshit fix try
-			System.out.println("1\""+ receivedPdu.getServerThreadName());
-			//TODO: sfdgf
 			// Nachricht empfangen
 			// Zeitmessung fuer Serverbearbeitungszeit starten
 			startTime = System.nanoTime();
@@ -480,11 +478,7 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 					// Login-Request vom Client empfangen
 					// an auditlog Server
 					loginRequestAction(receivedPdu);
-					System.out.println("2LI\""+ receivedPdu.getServerThreadName());
-					//TODO:dfgdf
 					auditLogger.sendAudit(receivedPdu);
-					System.out.println("3LI\""+ receivedPdu.getServerThreadName());
-					//TODO:dfgdf
 					break;
 
 				case CHAT_MESSAGE_REQUEST:
@@ -492,11 +486,7 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 					// an auditlog Server
 					// Chat-Nachricht angekommen, an alle verteilen
 					chatMessageRequestAction(receivedPdu);
-					System.out.println("2.M\""+ receivedPdu.getServerThreadName());
-					//TODO:dfgdf
 					auditLogger.sendAudit(receivedPdu);
-					System.out.println("3M\""+ receivedPdu.getServerThreadName());
-					//TODO:dfgdf
 					break;
 
 				case LOGOUT_REQUEST:
@@ -504,11 +494,7 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 					// an auditlog Server
 					// Logout-Request vom Client empfangen
 					logoutRequestAction(receivedPdu);
-					System.out.println("2.LO\""+ receivedPdu.getServerThreadName());
-					//TODO:dfgdf
 					auditLogger.sendAudit(receivedPdu);
-					System.out.println("3LO\""+ receivedPdu.getServerThreadName());
-					//TODO:dfgdf
 					break;
 
 				default:
