@@ -29,23 +29,31 @@ public class AuditLogPDU implements Serializable {
     private Date date;
     private ChatPDU receivedPdu;
 
+
     /**
-     * Konstruktoren
+     * Konstruktor, Werte werden mit null vorbelegt.
      */
-
-
     public AuditLogPDU(){
         this.type = null;
-        this.date = null;     //hier date erzeugen
+        this.date = null;
         this.userName = null;
         this.serverThread = null;
         this.clientThread = null;
         this.messageContent = null;
     }
 
+    /**
+     * Konstruktor mit Übergabe von Werten.
+     *
+     * @param type  PduType
+     * @param userName  Client Name
+     * @param serverThread  Server Thread
+     * @param clientThread client Thread
+     * @param messageContent Nachrichten Inhalt
+     */
     public AuditLogPDU (PduType type, String userName, String serverThread, String clientThread, String messageContent ){
         this.type = type;
-        this.date = new Date();     //hier date erzeugen
+        this.date = new Date();
         this.userName = userName;
         this.serverThread = serverThread;
         this.clientThread = clientThread;
@@ -54,13 +62,12 @@ public class AuditLogPDU implements Serializable {
 
 
     /**
-     * toString() Methoden
+     * toString() Methode für die Ausgabe in der Log Datei.
+     * @return String
      */
 
     public String toString() {
 
-        //TODO: Workerthread null verbessern
-       // switch (receivedPdu.getPduType()) {
         switch (this.getType()) {
 
             //Für ChatRequest wird Nachrichten Inhalt mitgeschickt
@@ -100,63 +107,109 @@ public class AuditLogPDU implements Serializable {
 
 
     /**
-     *setter aller variablen
+     * Setter für den PduType.
+     * @param type PduType
      */
     public void setType(PduType type){
         this.type = type;
     }
 
+    /**
+     * Setter für den Zeitstempel.
+     * @param date Zeitstempel
+     */
     public void setDate (Date date){        //überhaupt nötig?
         this.date = date;
     }
 
+    /**
+     * Setter für client Name.
+     * @param userName Client Name
+     */
     public void setUserName (String userName){
         this.userName = userName;
     }
 
+    /**
+     * Setter für Server Thread.
+     * @param serverThread Server Thread
+     */
     public void setServerThread (String serverThread){
         this.serverThread = serverThread;
     }
 
+    /**
+     * Setter für Client Thread.
+     * @param clientThread Client Thread
+     */
     public void setClientThread (String clientThread){
         this.clientThread = clientThread;
     }
 
+    /**
+     * Setter für Inhalt der Nachricht falls eine Message gesendet wurde.
+     * @param messageContent Inhalt der Nachricht falls Message Request
+     */
     public void setMessageContent (String messageContent){
         this.messageContent = messageContent;
     }
 
     /**
-     * getter aller variablen
+     * Getter für den PduType.
+     * @return type von Pdu
      */
     public PduType getType(){
         return(type);
     }
 
+    /**
+     * Getter für den Zeitstempel.
+     * @return
+     */
     public Date getDate(){      //überhaupt nötig?
         return(date);
     }
 
+    /**
+     * Getter für Client Namen.
+     * @return
+     */
     public String getUserName(){
         return(userName);
     }
 
+    /**
+     * Getter für den ServerThread.
+     * @return
+     */
     public String getServerThread(){
         return(serverThread);
     }
 
+    /**
+     * Getter für den ClientThread.
+     * @return
+     */
     public String getClientThread(){
         return(clientThread);
     }
 
+    /**
+     * Getter für den Nachrichten Inhalt falls eine Message geschickt wurde.
+     * @return
+     */
     public String getMessageContent(){
         return(messageContent);
     }
 
-    /**
-     *Event PDU's
-     */
 
+    /**
+     *
+     * @param date
+     * @param userName
+     * @param receivedPdu
+     * @return
+     */
     public static AuditLogPDU createLoginEventPdu(Date date,String userName, ChatPDU receivedPdu) {
 
         AuditLogPDU pdu = new AuditLogPDU();
