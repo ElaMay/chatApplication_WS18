@@ -87,6 +87,7 @@ public class AuditLogger {
         }
     }
 
+    //TODO: Synchronized für die recieved Methode
     public synchronized void  sendAudit(ChatPDU receivedPdu){
         AuditLogPDU auditLog = new AuditLogPDU(receivedPdu.getPduType(), receivedPdu.getUserName(), receivedPdu.getServerThreadName(), receivedPdu.getClientThreadName(), receivedPdu.getMessage());
         try {
