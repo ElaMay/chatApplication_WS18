@@ -1,15 +1,14 @@
 package edu.hm.dako.chat.server;
 
-import java.util.concurrent.Executors;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import edu.hm.dako.chat.common.ImplementationType;
 import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.LoggingConnectionDecorator;
 import edu.hm.dako.chat.connection.ServerSocketInterface;
 import edu.hm.dako.chat.tcp.TcpServerSocket;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.util.concurrent.Executors;
 
 /**
  * Uebernimmt die Konfiguration und Erzeugung bestimmter Server-Typen. 
@@ -48,12 +47,6 @@ public final class ServerFactory {
 				+ sendBufferSize + ", Empfangspuffer: " + receiveBufferSize);
 
 		switch (implType) {
-
-			//+++++++++++++++++
-			//hier noch UDP Case einfügen
-
-
-			//+++++++++++++++++
 		case TCPSimpleImplementation:
 
 			try {
@@ -71,6 +64,11 @@ public final class ServerFactory {
 		}
 	}
 
+	/**
+	 * Einen dekorierten ServeSocket zuzückbekommen.
+	 * @param serverSocket
+	 * @return DecoratingServerSocket (serverScket)
+	 */
 	private static ServerSocketInterface getDecoratedServerSocket(
 			ServerSocketInterface serverSocket) {
 		return new DecoratingServerSocket(serverSocket);

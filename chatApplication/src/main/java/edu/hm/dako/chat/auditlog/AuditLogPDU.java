@@ -204,7 +204,7 @@ public class AuditLogPDU implements Serializable {
 
 
     /**
-     *
+     * (Wird nicht verwendet) Methode fürs erstellen von Login.
      * @param date
      * @param userName
      * @param receivedPdu
@@ -223,6 +223,13 @@ public class AuditLogPDU implements Serializable {
         return pdu;
     }
 
+    /**
+     * (Wird nicht verwendet) Methode fürs erstellen von Logout.
+     * @param date
+     * @param userName
+     * @param receivedPdu
+     * @return
+     */
     public static AuditLogPDU createLogoutEventPdu(Date date, String userName, ChatPDU receivedPdu) {
 
         AuditLogPDU pdu = new AuditLogPDU();
@@ -236,6 +243,12 @@ public class AuditLogPDU implements Serializable {
         return pdu;
     }
 
+    /**
+     * (Wird nicht verwendet) Methode fürs erstellen von ChatMessage.
+     * @param userName
+     * @param receivedPdu
+     * @return
+     */
     public static AuditLogPDU createChatMessageEventPdu(String userName, ChatPDU receivedPdu) {
 
         AuditLogPDU pdu = new AuditLogPDU();

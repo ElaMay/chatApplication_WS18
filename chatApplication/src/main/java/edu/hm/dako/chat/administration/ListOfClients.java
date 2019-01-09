@@ -2,18 +2,27 @@ package edu.hm.dako.chat.administration;
 
 import java.util.ArrayList;
 
+/**
+ * Klasse für die Liste aller Clients.
+ * @author Diana Marjanovic
+ */
 
 public class ListOfClients {
 
-    //Namen der Clients, die dann aufgelistet werden.
+    /**
+     * Namen der Clients, die dann aufgelistet werden.
+     */
     private String clientName;
 
-
-    //Eine ArrayList wird für diese Klasse erzeugt.
+    /**
+     * Eine ArrayList wird für diese Klasse erzeugt.
+     */
     private ArrayList<ClientStatistic> clientList = new ArrayList<>();
 
 
-    //Konstruktor für diese Klasse.
+    /**
+     * Konstruktor für diese Klasse.
+     */
     public ListOfClients () {
         this.clientName = clientName;
     }
@@ -39,19 +48,24 @@ public class ListOfClients {
     /**
      * Liefert den Namen aus der Liste.
      * @param clientName
-     * @return
+     * @return clientList oder null
      */
     public ClientStatistic getClient (String clientName) {
         for (int i = 0  ; i < clientList.size(); i++) {
             if (clientList.get(i).getClientName().matches(clientName)) {
                 return clientList.get(i);
             } else {
-                //ToDo: do nothing.
+
             }
         }
         return null;
     }
 
+    /**
+     * Ein Getter für den clientList.
+     * @param index
+     * @return clientList(index)
+     */
     public ClientStatistic getClientsByIndex (int index) {
         return clientList.get(index);
     }

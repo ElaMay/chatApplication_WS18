@@ -1,11 +1,14 @@
 package edu.hm.dako.chat.administration;
 
 /**
- * Class for ClientStatistc Objekt.
+ * Klasse für den ClientStatistc Objekt.
  * @author Sophia Weißenberger
  */
 public class ClientStatistic {
 
+    /**
+     * Die benötigten Objektvariablen.
+     */
     private String clientName;
     private String loginTimestamp;
     private int messageCounter;
@@ -13,7 +16,7 @@ public class ClientStatistic {
 
 
     /**
-     * Constructor for ClientStatistic Object
+     * Konstruktor für den ClientStatistic Objekt
      */
     public ClientStatistic(){
         this.clientName = null;
@@ -24,7 +27,7 @@ public class ClientStatistic {
 
 
     /**
-     * toString() Method for ClientStatistic
+     * toString() Methode für den ClientStatistic
      * @return String
      */
     public String toString() {
@@ -39,7 +42,7 @@ public class ClientStatistic {
 
 
     /**
-     * Getter for clientName
+     * Getter für den clientName
      * @return clientName
      */
     public String getClientName() {
@@ -47,7 +50,7 @@ public class ClientStatistic {
     }
 
     /**
-     * Getter for loginTimestamp
+     * Getter für den loginTimestamp
      * @return loginTimestamp
      */
     public String getLoginTimestamp() {
@@ -55,7 +58,7 @@ public class ClientStatistic {
     }
 
     /**
-     * Getter for messageCounter
+     * Getter für den messageCounter
      * @return messageCounter
      */
     public int getMessageCounter() {
@@ -63,7 +66,7 @@ public class ClientStatistic {
     }
 
     /**
-     * Getter for logoutTimestamp
+     * Getter für den logoutTimestamp
      * @return logoutTimestamp
      */
     public String getLogoutTimestamp() {
@@ -71,7 +74,7 @@ public class ClientStatistic {
     }
 
     /**
-     * Setter for clientName
+     * Setter füe den clientName
      * @param clientName
      */
     public void setClientName(String clientName) {
@@ -79,7 +82,7 @@ public class ClientStatistic {
     }
 
     /**
-     * Setter for loginTimestamp
+     * Setter für den loginTimestamp
      * @param loginTimestamp
      */
     public void setLoginTimestamp(String loginTimestamp) {
@@ -87,7 +90,7 @@ public class ClientStatistic {
     }
 
     /**
-     * Setter for messageCounter
+     * Setter für den messageCounter
      * @param messageCounter
      */
     public void setMessageCounter(int messageCounter) {
@@ -95,7 +98,7 @@ public class ClientStatistic {
     }
 
     /**
-     * Setter for logoutTimestamp
+     * Setter für den logoutTimestamp
      * @param logoutTimestamp
      */
     public void setLogoutTimestamp(String logoutTimestamp) {

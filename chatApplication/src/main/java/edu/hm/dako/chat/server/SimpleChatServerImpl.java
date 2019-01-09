@@ -1,20 +1,19 @@
 package edu.hm.dako.chat.server;
 
-import java.net.UnknownHostException;
-import java.util.Vector;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import edu.hm.dako.chat.auditlog.AuditLogServerInterface;
 import edu.hm.dako.chat.auditlog.AuditLogger;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import edu.hm.dako.chat.common.ClientListEntry;
 import edu.hm.dako.chat.common.ExceptionHandler;
 import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.ServerSocketInterface;
 import javafx.concurrent.Task;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.net.UnknownHostException;
+import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 
 //import static edu.hm.dako.chat.server.ServerFactory.getDecoratedServerSocket; //später wieder einkommentieren (Sophia)
 
@@ -38,7 +37,7 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 	// entgegennimmt
 	private ServerSocketInterface socket;
 
-
+	//AuditLogger für unseren Server.
 	private AuditLogger auditLogger;
 
 	/**
@@ -68,6 +67,9 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 
 	}
 
+	/**
+	 * Eine start-Methode (mit dem AuditLogger).
+	 */
 	@Override
 	public void start() {
 		auditLogger.startAuditLog();
@@ -109,6 +111,10 @@ public class SimpleChatServerImpl extends AbstractChatServer {
 		th.start();
 	}
 
+	/**
+	 * Eine stop-Methode (mit dem AuditLogger).
+	 * @throws Exception
+	 */
 	@Override
 	public void stop() throws Exception {
 		auditLogger.stopAuditLog();

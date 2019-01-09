@@ -146,7 +146,7 @@ public class AuditLogServerImpl extends AbstractAuditLogServer {
     /**
      * Von ByteArray in Object umwandeln und Object rausbekommen.
      * @param data
-     * @return
+     * @return readObject.
      * @throws IOException
      * @throws ClassNotFoundException
      */

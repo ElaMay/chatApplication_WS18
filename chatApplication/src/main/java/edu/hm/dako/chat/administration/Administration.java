@@ -18,13 +18,19 @@ import java.io.IOException;
  */
 public class Administration {
 
+    /**
+     * Das sind die benötigten Objektvariablen.
+     */
     private BufferedReader bufferedReader;
 
     private ListOfClients clients = new ListOfClients();
 
     int messageCounter = 0;
 
-
+    /**
+     * Die Methode dient dazu, dass die Daten aus der Log-Datei in die Kommandozeile eingetragen wird.
+     * @param fileName
+     */
     private void loadFile(String fileName) {
         File file = new File(fileName);
 
@@ -38,7 +44,6 @@ public class Administration {
             String line = null;
             while ((line = in.readLine()) != null) {
                 //System.out.println("Gelesene Zeile: " + line);
-                //TODO: Magic
                 String[] s = line.split("/");
 
                 //Für den Fall, falls wir es brauchen sollten.
@@ -60,7 +65,7 @@ public class Administration {
                             clients.getClient(s1).setMessageCounter(clients.getClient(s1).getMessageCounter()+1);
                             messageCounter = messageCounter + 1;
                         } else {
-                            //ToDo: do nothing
+
                         }
                     } else if (s1 != null) {
                         if (s2.equals("Login-Request")) {
@@ -69,13 +74,12 @@ public class Administration {
                             clientNew.setLoginTimestamp(s3);
                             clients.addClients(clientNew);
                         } else {
-                            //ToDo: do nothing
+
                         }
 
                     } else {
-                        //ToDO: do nothing.
-                    }
 
+                    }
                 } else if (s.length == 5) {
                     String s1 = s[0]; //ClientName
                     String s2 = s[1]; //PDU-Type
@@ -84,7 +88,7 @@ public class Administration {
                     String s5 = s[4]; //Client-Thread
 
                     //if (s1.equals(clients.getClient(s1).getClientName())) {
-                    if (clients.getClient(s1) != null && s1.equals(clients.getClient(s1).getClientName())) { //ToDo: Nochmal anschauen!!!!!For + &&
+                    if (clients.getClient(s1) != null && s1.equals(clients.getClient(s1).getClientName())) {
                         if (s2.equals("Login-Request")) {
                             clients.getClient(s1).setLoginTimestamp(s3);
                             //Wenn ein Login bereits stattfand, dann wird der TimeStamp überschrieben.
@@ -96,7 +100,7 @@ public class Administration {
                             clients.getClient(s1).setMessageCounter(clients.getClient(s1).getMessageCounter()+1);
                             messageCounter = messageCounter + 1;
                         } else {
-                            //ToDo: do nothing
+
                         }
                     } else if (s1 != null) {
                         if (s2.equals("Login-Request")) {
@@ -105,11 +109,11 @@ public class Administration {
                             clientNew.setLoginTimestamp(s3);
                             clients.addClients(clientNew);
                         } else {
-                            //ToDo: do nothing
+
                         }
 
                     } else {
-                        //ToDO: do nothing.
+
                     }
                 }
             }
@@ -119,7 +123,6 @@ public class Administration {
             for (int i = 0; i < clients.getListSize(); i++) {
                System.out.println(clients.getClientsByIndex(i).toString());
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -132,7 +135,10 @@ public class Administration {
         }
     }
 
-
+    /**
+     * Eine main-Methode zum testen dieser Klasse.
+     * @param args
+     */
     public static void main(String[] args) {
         String fileName = args[0];
         Administration a = new Administration();

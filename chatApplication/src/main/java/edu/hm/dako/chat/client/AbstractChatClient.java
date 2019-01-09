@@ -1,11 +1,5 @@
 package edu.hm.dako.chat.client;
 
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import edu.hm.dako.chat.common.ChatPDU;
 import edu.hm.dako.chat.common.ClientConversationStatus;
 import edu.hm.dako.chat.common.ExceptionHandler;
@@ -14,6 +8,11 @@ import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.ConnectionFactory;
 import edu.hm.dako.chat.connection.DecoratingConnectionFactory;
 import edu.hm.dako.chat.tcp.TcpConnectionFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Gemeinsame Funktionalitaet fuer alle Client-Implementierungen.
@@ -99,6 +98,12 @@ public abstract class AbstractChatClient implements ClientCommunication {
 		return new DecoratingConnectionFactory(connectionFactory);
 	}
 
+	/**
+	 * Eine Methode um sich aös client anzumelden.
+	 * @param name
+	 *          Username (Login-Kennung)
+	 * @throws IOException
+	 */
 	@Override
 	public void login(String name) throws IOException {
 
@@ -119,6 +124,12 @@ public abstract class AbstractChatClient implements ClientCommunication {
 		}
 	}
 
+	/**
+	 * Eine Methode um sich als client auszuloggn.
+	 * @param name
+	 *          Username (Login-Kennung)
+	 * @throws IOException
+	 */
 	@Override
 	public void logout(String name) throws IOException {
 
@@ -140,6 +151,13 @@ public abstract class AbstractChatClient implements ClientCommunication {
 		}
 	}
 
+	/**
+	 * Eine Methode um zu kommunizieren.
+	 * @param name
+	 *          Username (Login-Kennung)
+	 * @param text
+	 * @throws IOException
+	 */
 	@Override
 	public void tell(String name, String text) throws IOException {
 
@@ -163,6 +181,9 @@ public abstract class AbstractChatClient implements ClientCommunication {
 		}
 	}
 
+	/**
+	 * Eine Methode um die Connection zu beenden.
+	 */
 	@Override
 	public void cancelConnection() {
 		try {
@@ -172,6 +193,10 @@ public abstract class AbstractChatClient implements ClientCommunication {
 		}
 	}
 
+	/**
+	 * Eine Abfrage, ob man sich wirklich abgemeldet hat.
+	 * @return
+	 */
 	@Override
 	public boolean isLoggedOut() {
 		return (sharedClientData.status == ClientConversationStatus.UNREGISTERED);

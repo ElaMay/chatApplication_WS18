@@ -24,6 +24,10 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 		super(userInterface, con, sharedData);
 	}
 
+	/**
+	 * Testen des LoginResponse.
+	 * @param receivedPdu
+	 */
 	@Override
 	protected void loginResponseAction(ChatPDU receivedPdu) {
 
@@ -56,6 +60,10 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 		}
 	}
 
+	/**
+	 * Testen des LoginEvents.
+	 * @param receivedPdu
+	 */
 	@Override
 	protected void loginEventAction(ChatPDU receivedPdu) {
 
@@ -73,6 +81,10 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 		}
 	}
 
+	/**
+	 * Testen des LogoutResponse.
+	 * @param receivedPdu
+	 */
 	@Override
 	protected void logoutResponseAction(ChatPDU receivedPdu) {
 
@@ -90,6 +102,10 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 		userInterface.logoutComplete();
 	}
 
+	/**
+	 * Testen des LogoutEvents.
+	 * @param receivedPdu
+	 */
 	@Override
 	protected void logoutEventAction(ChatPDU receivedPdu) {
 
@@ -106,6 +122,10 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 		}
 	}
 
+	/**
+	 * Die chatMessageResponseAction-Methode.
+	 * @param receivedPdu
+	 */
 	@Override
 	protected void chatMessageResponseAction(ChatPDU receivedPdu) {
 
@@ -137,6 +157,10 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 		}
 	}
 
+	/**
+	 * Eine Methode, um zu den Event unseres chat messengers zu überprüfen.
+	 * @param receivedPdu
+	 */
 	@Override
 	protected void chatMessageEventAction(ChatPDU receivedPdu) {
 
@@ -187,7 +211,6 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 					case LOGIN_RESPONSE:
 						// Login-Bestaetigung vom Server angekommen
 						loginResponseAction(receivedPdu);
-
 						break;
 
 					case LOGIN_EVENT:
@@ -201,7 +224,6 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 						// Meldung vom Server, dass sich die Liste der
 						// angemeldeten User veraendert hat
 						logoutEventAction(receivedPdu);
-
 						break;
 
 					case CHAT_MESSAGE_EVENT:
@@ -235,14 +257,12 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 						// Meldung vom Server, dass sich die Liste der
 						// angemeldeten User erweitert hat
 						loginEventAction(receivedPdu);
-
 						break;
 
 					case LOGOUT_EVENT:
 						// Meldung vom Server, dass sich die Liste der
 						// angemeldeten User veraendert hat
 						logoutEventAction(receivedPdu);
-
 						break;
 
 					default:
@@ -269,14 +289,12 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 						// Meldung vom Server, dass sich die Liste der
 						// angemeldeten User erweitert hat
 						loginEventAction(receivedPdu);
-
 						break;
 
 					case LOGOUT_EVENT:
 						// Meldung vom Server, dass sich die Liste der
 						// angemeldeten User veraendert hat
 						logoutEventAction(receivedPdu);
-
 						break;
 
 					default:
@@ -289,7 +307,6 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 				case UNREGISTERED:
 					log.debug(
 							"Ankommende PDU im Zustand " + sharedClientData.status + " wird verworfen");
-
 					break;
 
 				default:
@@ -306,6 +323,5 @@ public class SimpleMessageListenerThreadImpl extends AbstractMessageListenerThre
 		}
 		log.debug("Ordnungsgemaesses Ende des SimpleMessageListener-Threads fuer User"
 				+ sharedClientData.userName + ", Status: " + sharedClientData.status);
-	} // run
-
+	}
 }

@@ -1,16 +1,18 @@
 package edu.hm.dako.chat.server;
 
-import java.net.*;
-import java.util.Vector;
-
 import edu.hm.dako.chat.auditlog.AuditLogger;
-import edu.hm.dako.chat.common.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import edu.hm.dako.chat.common.ChatPDU;
+import edu.hm.dako.chat.common.ClientConversationStatus;
+import edu.hm.dako.chat.common.ClientListEntry;
+import edu.hm.dako.chat.common.ExceptionHandler;
 import edu.hm.dako.chat.connection.Connection;
 import edu.hm.dako.chat.connection.ConnectionTimeoutException;
 import edu.hm.dako.chat.connection.EndOfFileException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.net.UnknownHostException;
+import java.util.Vector;
 
 /**
  * Worker-Thread zur serverseitigen Bedienung einer Session mit einem Client.
@@ -36,8 +38,10 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		}
 	}
 
+	/**
+	 * Nachricht die man vom Client bekommt
+	 */
 	@Override
-	//(Nachricht die man vom Client bekommt.)
 	public void run() {
 		log.debug(
 				"ChatWorker-Thread erzeugt, Threadname: " + Thread.currentThread().getName());
@@ -93,6 +97,10 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		}
 	}
 
+	/**
+	 * Überprüfen, ob es mit dem einloggen funktioniert
+	 * @param receivedPdu
+	 */
 	@Override
 	protected void loginRequestAction(ChatPDU receivedPdu) {
 
@@ -155,8 +163,11 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		}
 	}
 
+	/**
+	 * Überprüfen, ob es mit dem ausloggen funktioniert
+	 * @param receivedPdu
+	 */
 	@Override
-	//(Überprüfen, ob es mit dem ausloggen funktioniert)
 	protected void logoutRequestAction(ChatPDU receivedPdu) {
 
 		ChatPDU pdu;
@@ -207,40 +218,11 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		}
 	}
 
-	//++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-//	private void sendPacket() throws IOException, SocketException, UnknownHostException {
-//		DatagramSocket socket = new DatagramSocket();
-////		byte buffer[] = new byte[65535];
-////		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-//		byte buffer[] = new byte[1];
-//		InetAddress address = InetAddress.getByName("192.168.2.238");
-//		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, address, 3001);
-//		socket.send(packet);
-//		socket.close();
-//		try {
-//			//Dieses Objekt wird gecastet.
-////			logWriter((AuditLogPDU) deserialize(packet.getData()));
-//			logWriter((AuditLogPDU) serialize(packet.setData()));
-//		}catch (Exception e){
-//			log.error(e.getMessage());
-//		}
-//
-//	}
-
-	//++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
-
-
-
+	/**
+	 * Verschicken der Nachrichten zwischen den Clients
+	 * @param receivedPdu
+	 */
 	@Override
-	//(Verschicken der Nachrichten zwischen den Clients)
 	protected void chatMessageRequestAction(ChatPDU receivedPdu) {
 
 		ClientListEntry client = null;
@@ -253,7 +235,6 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		if (!clients.existsClient(receivedPdu.getUserName())) {
 			log.debug("User nicht in Clientliste: " + receivedPdu.getUserName());
 		} else {
-
 
 			// Liste der betroffenen Clients ermitteln, (die drinnen sind)
 			Vector<String> sendList = clients.getClientNameList();
@@ -408,13 +389,15 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 		return false;
 	}
 
+	/**
+	 * Überprüfung der Nachrichten auf Zeit oder ob dies empfangen wurde oder ob derjenige noch eingeloggt ist.
+	 * @throws Exception
+	 */
 	@Override
-	//(Überprüfung der Nachrichten auf Zeit oder ob dies empfangen wurde oder ob derjenige noch eingeloggt ist)
 	protected void handleIncomingMessage() throws Exception {
 		if (checkIfClientIsDeletable() == true) {
 			return;
 		}
-
 		// Warten auf naechste Nachricht
 		ChatPDU receivedPdu = null;
 
@@ -429,7 +412,6 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 			startTime = System.nanoTime();
 
 		} catch (ConnectionTimeoutException e) {
-
 			// Wartezeit beim Empfang abgelaufen, pruefen, ob der Client
 			// ueberhaupt noch etwas sendet
 			log.debug(
@@ -474,7 +456,6 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 			switch (receivedPdu.getPduType()) {
 
 				case LOGIN_REQUEST:
-//					auditLogger.sendAudit(receivedPdu);
 					// Login-Request vom Client empfangen
 					// an auditlog Server
 					loginRequestAction(receivedPdu);
@@ -482,7 +463,6 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 					break;
 
 				case CHAT_MESSAGE_REQUEST:
-//					auditLogger.sendAudit(receivedPdu);
 					// an auditlog Server
 					// Chat-Nachricht angekommen, an alle verteilen
 					chatMessageRequestAction(receivedPdu);
@@ -490,7 +470,6 @@ public class SimpleChatWorkerThreadImpl extends AbstractWorkerThread {
 					break;
 
 				case LOGOUT_REQUEST:
-//					auditLogger.sendAudit(receivedPdu);
 					// an auditlog Server
 					// Logout-Request vom Client empfangen
 					logoutRequestAction(receivedPdu);
