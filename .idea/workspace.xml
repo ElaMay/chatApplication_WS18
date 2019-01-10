@@ -3,18 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ec4eb309-e0c3-48d5-9e57-63111cd83dd9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/client/AbstractChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/client/AbstractChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/client/SimpleMessageListenerThreadImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/client/SimpleMessageListenerThreadImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/client/SimpleMessageListenerThreadImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/client/SimpleMessageListenerThreadImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/ServerFactory$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/ServerFactory$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/ServerFactory$DecoratingServerSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/ServerFactory$DecoratingServerSocket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/ServerFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/ServerFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/SimpleChatServerImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/SimpleChatServerImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/SimpleChatServerImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/SimpleChatServerImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/SimpleChatWorkerThreadImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/SimpleChatWorkerThreadImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/SimpleChatWorkerThreadImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ChatApplication/edu/hm/dako/chat/server/SimpleChatWorkerThreadImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/administration/Administration.java" beforeDir="false" afterPath="$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/administration/Administration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogPDU.java" beforeDir="false" afterPath="$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogPDU.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,11 +23,11 @@
     <session id="1860282663">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="16" />
+          <entry key="project.closed" value="17" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="2" />
-          <entry key="project.open.time.14" value="4" />
+          <entry key="project.open.time.14" value="5" />
           <entry key="project.open.time.15" value="4" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.18" value="1" />
@@ -47,7 +35,7 @@
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -55,13 +43,13 @@
           <entry key="Benchmarking-ChatApp-Protokolldatei" value="1" />
           <entry key="fxml" value="2" />
           <entry key="java" value="161" />
-          <entry key="log" value="41" />
+          <entry key="log" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JAVA" value="161" />
-          <entry key="Log" value="20" />
+          <entry key="Log" value="22" />
           <entry key="PLAIN_TEXT" value="22" />
           <entry key="XML" value="2" />
         </counts>
@@ -70,14 +58,14 @@
         <counts>
           <entry key="java" value="14617" />
           <entry key="log" value="12" />
-          <entry key="txt" value="788" />
+          <entry key="txt" value="805" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="14617" />
           <entry key="Log" value="12" />
-          <entry key="PLAIN_TEXT" value="788" />
+          <entry key="PLAIN_TEXT" value="805" />
         </counts>
       </usages-collector>
     </session>
@@ -90,7 +78,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogServerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-265">
+            <state relative-caret-position="2465">
               <caret line="148" column="26" selection-start-line="148" selection-start-column="26" selection-end-line="148" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -120,7 +108,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
+            <state relative-caret-position="1802">
               <caret line="113" column="23" selection-start-line="113" selection-start-column="11" selection-end-line="113" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -132,34 +120,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogPDU.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
+            <state relative-caret-position="1309">
               <caret line="81" column="111" selection-start-line="81" selection-start-column="111" selection-end-line="81" selection-end-column="111" />
-              <folding>
-                <element signature="e#4176#4177#0" expanded="true" />
-                <element signature="e#4208#4209#0" expanded="true" />
-                <element signature="e#4328#4329#0" expanded="true" />
-                <element signature="e#4386#4387#0" expanded="true" />
-                <element signature="e#4516#4517#0" expanded="true" />
-                <element signature="e#4556#4557#0" expanded="true" />
-                <element signature="e#4702#4703#0" expanded="true" />
-                <element signature="e#4750#4751#0" expanded="true" />
-                <element signature="e#4896#4897#0" expanded="true" />
-                <element signature="e#4944#4945#0" expanded="true" />
-                <element signature="e#5166#5167#0" expanded="true" />
-                <element signature="e#5218#5219#0" expanded="true" />
-                <element signature="e#5324#5325#0" expanded="true" />
-                <element signature="e#5352#5353#0" expanded="true" />
-                <element signature="e#5446#5447#0" expanded="true" />
-                <element signature="e#5498#5499#0" expanded="true" />
-                <element signature="e#5595#5596#0" expanded="true" />
-                <element signature="e#5627#5628#0" expanded="true" />
-                <element signature="e#5732#5733#0" expanded="true" />
-                <element signature="e#5768#5769#0" expanded="true" />
-                <element signature="e#5873#5874#0" expanded="true" />
-                <element signature="e#5909#5910#0" expanded="true" />
-                <element signature="e#6057#6058#0" expanded="true" />
-                <element signature="e#6095#6096#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -167,7 +129,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/administration/Administration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2074">
+            <state relative-caret-position="620">
               <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -177,24 +139,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547133480137.log">
-          <provider selected="true" editor-type-id="LogFileEditorProvider">
-            <state relative-caret-position="383">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547139445552.log">
+          <provider selected="true" editor-type-id="LogFileEditorProvider" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/server/ChatServerGUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="46" column="59" lean-forward="true" selection-start-line="46" selection-start-column="59" selection-end-line="46" selection-end-column="59" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547141422564.log">
+          <provider selected="true" editor-type-id="LogFileEditorProvider" />
         </entry>
       </file>
     </leaf>
@@ -256,10 +207,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1228" />
-    <option name="y" value="294" />
-    <option name="width" value="1614" />
-    <option name="height" value="874" />
+    <option name="x" value="4038" />
+    <option name="y" value="370" />
+    <option name="width" value="807" />
+    <option name="height" value="437" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -362,34 +313,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ChatApplication" type="58d84e3e:PackageViewProjectNode" />
-              <item name="ChatApplication" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="ChatApplication" type="58d84e3e:PackageViewProjectNode" />
-              <item name="ChatApplication" type="616d4139:PackageViewModuleNode" />
-              <item name="main.java.edu.hm.dako.chat" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="ChatApplication" type="58d84e3e:PackageViewProjectNode" />
-              <item name="ChatApplication" type="616d4139:PackageViewModuleNode" />
-              <item name="main.java.edu.hm.dako.chat" type="1f31426a:PackageElementNode" />
-              <item name="client" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="ChatApplication" type="58d84e3e:PackageViewProjectNode" />
-              <item name="ChatApplication" type="616d4139:PackageViewModuleNode" />
-              <item name="main.java.edu.hm.dako.chat" type="1f31426a:PackageElementNode" />
-              <item name="server" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -460,6 +384,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="chat" type="462c0819:PsiDirectoryNode" />
+              <item name="benchmarking" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ChatApplication" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ChatApplication" type="462c0819:PsiDirectoryNode" />
+              <item name="chatApplication" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="chat" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -476,13 +410,40 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ChatApplication" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ChatApplication" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="ChatApplication" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ChatApplication" type="616d4139:PackageViewModuleNode" />
+              <item name="main.java.edu.hm.dako.chat" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="ChatApplication" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ChatApplication" type="616d4139:PackageViewModuleNode" />
+              <item name="main.java.edu.hm.dako.chat" type="1f31426a:PackageElementNode" />
+              <item name="client" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="ChatApplication" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ChatApplication" type="616d4139:PackageViewModuleNode" />
+              <item name="main.java.edu.hm.dako.chat" type="1f31426a:PackageElementNode" />
+              <item name="server" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547135800369" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547141858932" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -502,7 +463,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ClientFxGUI">
+  <component name="RunManager" selected="Application.miau">
     <configuration name="AuditLogServerImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.hm.dako.chat.auditlog.AuditLogServerImpl" />
       <module name="ChatApplication" />
@@ -559,7 +520,7 @@
     <configuration name="miau" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="edu.hm.dako.chat.administration.Administration" />
       <module name="ChatApplication" />
-      <option name="PROGRAM_PARAMETERS" value="C:\Users\Test\IdeaProjects\ChatApplication\SimpleChatServerImpl1547133480137.log" />
+      <option name="PROGRAM_PARAMETERS" value="C:\Users\Test\IdeaProjects\ChatApplication\SimpleChatServerImpl1547141422564.log" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -573,10 +534,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientFxGUI" />
-        <item itemvalue="Application.ChatServerGUI" />
-        <item itemvalue="Application.AuditLogServerImpl" />
         <item itemvalue="Application.BenchmarkingClientGuiFx2" />
+        <item itemvalue="Application.AuditLogServerImpl" />
+        <item itemvalue="Application.ChatServerGUI" />
+        <item itemvalue="Application.ClientFxGUI" />
       </list>
     </recent_temporary>
   </component>
@@ -607,7 +568,8 @@
       <workItem from="1546966758581" duration="8397000" />
       <workItem from="1547032306910" duration="11300000" />
       <workItem from="1547058273455" duration="1747000" />
-      <workItem from="1547116785694" duration="10296000" />
+      <workItem from="1547116785694" duration="12448000" />
+      <workItem from="1547139172296" duration="1660000" />
     </task>
     <task id="LOCAL-00001" summary="Audit log server wartet auf Nachrichten">
       <created>1544986583155</created>
@@ -735,11 +697,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547042008763</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Letzte Änderungen">
+      <created>1547135836705</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1547135836705</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136185000" />
+    <option name="totallyTimeSpent" value="139997000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -751,10 +720,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1613" height="873" extended-state="6" />
-    <editor active="true" />
+    <frame x="3192" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49930266" visible="true" weight="0.2437299" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49930266" visible="true" weight="0.21641791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -764,15 +732,15 @@
       <window_info anchor="bottom" id="Messages" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.2875" />
-      <window_info active="true" anchor="bottom" id="Debug" order="4" visible="true" weight="0.25694445" />
+      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.26555556" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.25694445" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.21777777" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.21666667" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -845,23 +813,10 @@
     <MESSAGE value="Listen für die Anzahl der User erstellen.&#10;Container-klasse erstellen." />
     <MESSAGE value="Javadoc wird hinzugefügt." />
     <MESSAGE value="Javadoc ist jetzt endgültig fertig." />
-    <option name="LAST_COMMIT_MESSAGE" value="Javadoc ist jetzt endgültig fertig." />
+    <MESSAGE value="Letzte Änderungen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Letzte Änderungen" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/connection/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/connection/ConnectionFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/connection/ConnectionTimeoutException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -989,8 +944,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/client/LoggedInGui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/client/SharedClientData.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1007,8 +962,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/client/LogInGui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/client/ClientCommunication.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1131,10 +1086,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547117106635.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="289">
-          <caret line="17" column="15" lean-forward="true" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+    <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547117106635.log" />
+    <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547126530960.log" />
+    <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547131834441.log" />
+    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogServerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2465">
+          <caret line="148" column="26" selection-start-line="148" selection-start-column="26" selection-end-line="148" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1145,66 +1106,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogServerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-265">
-          <caret line="148" column="26" selection-start-line="148" selection-start-column="26" selection-end-line="148" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="113" column="23" selection-start-line="113" selection-start-column="11" selection-end-line="113" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547126530960.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="391">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogPDU.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="81" column="111" selection-start-line="81" selection-start-column="111" selection-end-line="81" selection-end-column="111" />
-          <folding>
-            <element signature="e#4176#4177#0" expanded="true" />
-            <element signature="e#4208#4209#0" expanded="true" />
-            <element signature="e#4328#4329#0" expanded="true" />
-            <element signature="e#4386#4387#0" expanded="true" />
-            <element signature="e#4516#4517#0" expanded="true" />
-            <element signature="e#4556#4557#0" expanded="true" />
-            <element signature="e#4702#4703#0" expanded="true" />
-            <element signature="e#4750#4751#0" expanded="true" />
-            <element signature="e#4896#4897#0" expanded="true" />
-            <element signature="e#4944#4945#0" expanded="true" />
-            <element signature="e#5166#5167#0" expanded="true" />
-            <element signature="e#5218#5219#0" expanded="true" />
-            <element signature="e#5324#5325#0" expanded="true" />
-            <element signature="e#5352#5353#0" expanded="true" />
-            <element signature="e#5446#5447#0" expanded="true" />
-            <element signature="e#5498#5499#0" expanded="true" />
-            <element signature="e#5595#5596#0" expanded="true" />
-            <element signature="e#5627#5628#0" expanded="true" />
-            <element signature="e#5732#5733#0" expanded="true" />
-            <element signature="e#5768#5769#0" expanded="true" />
-            <element signature="e#5873#5874#0" expanded="true" />
-            <element signature="e#5909#5910#0" expanded="true" />
-            <element signature="e#6057#6058#0" expanded="true" />
-            <element signature="e#6095#6096#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AbstractAuditLogServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1212,13 +1113,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547131834441.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/administration/Administration.java">
+    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2074">
-          <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
+        <state relative-caret-position="1802">
+          <caret line="113" column="23" selection-start-line="113" selection-start-column="11" selection-end-line="113" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/auditlog/AuditLogPDU.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1309">
+          <caret line="81" column="111" selection-start-line="81" selection-start-column="111" selection-end-line="81" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/server/ChatServerGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="56" column="34" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1227,20 +1142,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547133480137.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="383">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="391">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/server/ChatServerGUI.java">
+    <entry file="file://$PROJECT_DIR$/chatApplication/src/main/java/edu/hm/dako/chat/administration/Administration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="46" column="59" lean-forward="true" selection-start-line="46" selection-start-column="59" selection-end-line="46" selection-end-column="59" />
+        <state relative-caret-position="620">
+          <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547139445552.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimpleChatServerImpl1547141422564.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider" />
     </entry>
   </component>
   <component name="masterDetails">
