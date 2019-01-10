@@ -25,7 +25,9 @@ public class Administration {
 
     private ListOfClients clients = new ListOfClients();
 
-    int messageCounter = 0;
+    private int messageCounter = 0;
+
+    private int logoutCounter = 0;
 
     /**
      * Die Methode dient dazu, dass die Daten aus der Log-Datei in die Kommandozeile eingetragen wird.
@@ -44,7 +46,7 @@ public class Administration {
             String line = null;
             while ((line = in.readLine()) != null) {
                 //System.out.println("Gelesene Zeile: " + line);
-                String[] s = line.split("/");
+                String[] s = line.split("@@");
 
                 //Für den Fall, falls wir es brauchen sollten.
                 if(s.length == 6) {
@@ -93,8 +95,9 @@ public class Administration {
                             clients.getClient(s1).setLoginTimestamp(s3);
                             //Wenn ein Login bereits stattfand, dann wird der TimeStamp überschrieben.
                         } else if (s2.equals("Logout-Request")) {
-                            System.out.println("Lo");
+                            //System.out.println("Lo");
                             clients.getClient(s1).setLogoutTimestamp(s3);
+                            logoutCounter = logoutCounter + 1;
                         } else if (s2.equals("Chat-Message-Request")) {
                             System.out.println("M");
                             clients.getClient(s1).setMessageCounter(clients.getClient(s1).getMessageCounter()+1);
@@ -118,7 +121,8 @@ public class Administration {
                 }
             }
             System.out.println("Anzahl der insgesamt angemeldeten Clients: "+ clients.getListSize());
-            System.out.println("Anzahl der insgesamt gesendetetn Nachrichten: "+ messageCounter);
+            System.out.println("Anzahl der insgesamt abgemeldeten Clients: "+ logoutCounter);
+            System.out.println("Anzahl der insgesamt gesendeten Textnachrichten: "+ messageCounter);
 
             for (int i = 0; i < clients.getListSize(); i++) {
                System.out.println(clients.getClientsByIndex(i).toString());
